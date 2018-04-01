@@ -1,0 +1,30 @@
+.col-lg-12
+  = simple_form_for  @product do |f|
+    .form-group.row
+      %label{for: 'name', class: 'col-2 col-form-label'}
+        Name
+      .col-7
+        = f.input :name, label: false, input_html: { class: 'form-control' }
+    .form-group.row
+      %label{for: 'price', class: 'col-2 col-form-label'}
+        Price
+      .col-7
+        = f.input :price, as: :string, label: false, input_html: { class: 'form-control', id: 'product_price' }, data: {autonumeric: {aSign: 'USD ', mDec: 0}}
+    .form-group.row
+      %label{for: 'product_type', class: 'col-2 col-form-label'}
+        Product Type
+      .col-7
+        = f.input :product_type_id, collection: ProductType.all.map{ |p| [p.name, p.id]}, include_blank: true, label: false, input_html: { class: 'form-control' }
+    .form-group.row
+      .col-9
+        = f.simple_fields_for :upload_files do |file|
+          .nested_attr_wraper
+            = render "upload_files_fields", f: file
+        .nested_attr_wraper
+          .links
+            = link_to_add_association 'Add File', f, :upload_files,
+              partial: "upload_files_fields",
+              class: "btn btn-primary"
+    .form-group.row
+      .col-9
+        = f.submit :save, class: 'btn btn-primary pull-right'

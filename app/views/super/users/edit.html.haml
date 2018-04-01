@@ -1,0 +1,17 @@
+%div.row
+  %div.col-sm-12
+    %div.page-title-box
+      %h4.page-title Edit User
+      %ol.breadcrumb.float-right
+        %li.breadcrumb-item.active
+          %a{href: '/'}
+      %div.clearfix
+    .box-body
+      .col-lg-12
+        %ul.nav.nav-tabs.tabs-bordered
+          %li.nav-item
+            %a.nav-link{ href: '#user_basic_info', "data-toggle" => 'tab', class: "#{'active' if !@profile_updating && !@income_updating }" }
+              Account
+        .tab-content
+          .tab-pane{ id: 'user_basic_info', class: "#{'active' if !@profile_updating && !@income_updating }" }
+            = render 'form', user: @user

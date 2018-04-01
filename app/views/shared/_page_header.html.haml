@@ -1,0 +1,14 @@
+.row
+  .col-sm-12
+    .page-title-box
+      %h4.page-title= title
+      %ol.breadcrumb.float-right
+        %li.breadcrumb-item
+          %a{ href: root_path }
+            %i.fa.fa-dashboard
+            Home
+        %li.breadcrumb-item
+          %a{:href => "#"} Dashboard
+          -#%a{ href: breadcrumb_root_path }= breadcrumb_label
+
+      .clearfix

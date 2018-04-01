@@ -1,0 +1,9 @@
+%section.content
+  .box
+    .box-header.with-border
+      %h3.box-title User
+    .box-body
+      = labeled_data_paragraph 'Title', @dashboard_message.title
+      = labeled_data_paragraph 'Body', @dashboard_message.body
+      = link_to 'Back', super_dashboard_messages_path, class: 'btn btn-primary'
+      = link_to 'Edit', edit_super_dashboard_message_path(@dashboard_message), class: 'btn btn-primary'

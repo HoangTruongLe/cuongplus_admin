@@ -1,0 +1,34 @@
+.nested-fields
+  %hr
+  %h4.header-title.m-l-10 ETP
+  .col-12.card-box
+    = f.input :question_type, input_html: {value: 'etp'}, as: :hidden
+    .form-group.row
+      %label{for: 'employer_abn', class: 'col-2 col-form-label'}
+        Employer ABN
+        %span.text-danger
+      .col-3
+        = f.input :employer_abn, label: false, input_html: { class: 'form-control' }
+      %label{for: 'employer_name', class: 'col-2 col-form-label'}
+        Employer Name
+        %span.text-danger
+      .col-3
+        = f.input :employer_name, label: false, input_html: { class: 'form-control' }
+    .form-group.row
+      %label{for: 'tax_withheld', class: 'col-2 col-form-label'}
+        Tax Withheld
+        %span.text-danger
+      .col-3
+        = f.input :tax_withheld, label: false, input_html: { class: 'form-control' }
+      %label{for: 'taxable_component', class: 'col-2 col-form-label'}
+        Taxable Component
+        %span.text-danger
+      .col-3
+        = f.input :taxable_component, label: false, input_html: { class: 'form-control' }
+    .form-group.row
+      %label{for: 'tax_free_component', class: 'col-2 col-form-label'}
+        Tax Free Component
+        %span.text-danger
+      .col-3
+        = f.input :tax_free_component, label: false, input_html: { class: 'form-control' }
+    = link_to_remove_association "remove", f, class: 'btn btn-danger btn-rounded'

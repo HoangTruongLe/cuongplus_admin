@@ -1,0 +1,15 @@
+.nested-fields
+  %hr
+  %h4.header-title.m-l-10
+    Please attach your documents if you prefer.
+    %span.text-danger Max size: 5MB
+  .col-12.card-box
+    .form-group.row
+      .col-3
+        = f.input :id, as: :hidden
+        = f.input :file, as: :file, label: false, input_html: { class: 'form-control' }
+      .col-2.remove_obj
+        = link_to_remove_association "Remove", f, class: 'btn btn-danger btn-rounded mt-1 remove_fields'
+      .col-3
+        - unless f.object.new_record?
+          %img{src: f.object.file_url, class: 'product_thumb'}

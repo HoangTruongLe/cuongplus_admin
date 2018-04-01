@@ -1,0 +1,43 @@
+%div.wrapper-page
+  %div.text-center
+    %a{class:'logo-lg', href: '#'}
+      %i.mdi.mdi-radar
+        %span Ezy
+        Portal
+  = devise_error_messages!
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    %div.form-group.row
+      %div.col-12
+        %div.input-group
+          %span.input-group-addon
+            %i.mdi.mdi-account-star
+          = f.text_field :first_name, autofocus: true, class: 'form-control', placeholder: true
+    %div.form-group.row
+      %div.col-12
+        %div.input-group
+          %span.input-group-addon
+            %i.mdi.mdi-account-network
+          = f.text_field :last_name, autofocus: true, class: 'form-control', placeholder: true
+    %div.form-group.row
+      %div.col-12
+        %div.input-group
+          %span.input-group-addon
+            %i.mdi.mdi-account
+          = f.email_field :email, autofocus: true, class: 'form-control', placeholder: true
+    %div.form-group.row
+      %div.col-12
+        %div.input-group
+          %span.input-group-addon
+            %i.mdi.mdi-radar
+          = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: true
+    %div.form-group.row
+      %div.col-12
+        %div.input-group
+          %span.input-group-addon
+            %i.mdi.mdi-radar
+          = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: true
+    %div.form-group.text-right.m-t-20
+      %div.col-12
+        %button.btn.btn-primary.btn-custom.w-md.waves-effect.waves-light{:type => "submit"}
+          = t('sign_up.register')
+    = render "devise/shared/links"

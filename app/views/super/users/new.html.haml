@@ -1,0 +1,13 @@
+%div.row
+  %div.col-sm-12
+    %div.page-title-box
+      %h4.page-title New User
+      %ol.breadcrumb.float-right
+        %li.breadcrumb-item.active
+          %a{href: '/'}
+      %div.clearfix
+    .box-body
+      .col-lg-12
+        .tab-content
+          .tab-pane.active.show{ id: 'user_basic_info' }
+            = render 'form', action: 'new', user: @user

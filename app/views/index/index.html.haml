@@ -1,0 +1,16 @@
+= render 'shared/page_header', title: 'Dashboard'
+
+.row.m-t-40
+  .col-lg-12.center-page
+    - @dashboard_messages.each do |dashboard_message|
+      %ul
+        %li{style:"padding-left:5px;"}
+          %p
+            = format_datetime_dmy(dashboard_message.updated_at) + ' - ' + dashboard_message.title
+            - if can? :update, dashboard_message
+              = link_to '', edit_super_dashboard_message_path(dashboard_message), class: 'fa fa-edit'
+          %p
+            = dashboard_message.body
+.box-footer.clearfix
+  %ul.pagination.pagination-sm.no-margin.pull-right
+    = paginate @dashboard_messages, outer_window: 3

@@ -1,0 +1,29 @@
+%div.topbar
+  %div.topbar-left
+    %div.text-center
+      %a{class:'logo', href: '#'}
+        %i.mdi.mdi-radar CuongPlus
+  %nav.navbar-custom
+    %ul.list-inline.float-right.mb-0
+      %li.list-inline-item.notification-list.hide-phone
+        %a{class:'nav-link waves-light waves-effect', href: '#' , id: 'btn-fullscreen'}
+          %i.mdi.mdi-crop-free.noti-icon
+      %li.list-inline-item.dropdown.notification-list
+        %a{class:'nav-link dropdown-toggle waves-effect waves-light nav-user', href: '#' , 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'false', 'aria-expanded': 'false'}
+          %img{src: '/images/avatar-1.jpg', alt: 'user', class: 'rounded-circle'}
+        %div.dropdown-menu.dropdown-menu-right.profile-dropdown{'aria-labelledby': 'Preview'}
+          %div.dropdown-item.noti-title
+            %h5.text-overflow
+              %small= current_user.full_name.presence || current_user.email
+          %a{href: destroy_user_session_path, class:  'dropdown-item notify-item'}
+            %i.mdi.mdi-logout
+              %span Logout
+    %ul.list-inline.menu-left.mb-0
+      %li.float-left
+        %button.button-menu-mobile.open-left.waves-light.waves-effect
+          %i.mdi.mdi-menu
+      %li.hide-phone.app-search
+        %form{role: 'search'}
+          %input{type: 'text', placeholder: 'Search...', class: 'form-control'}
+          %a{href: ''}
+            %i.fa.fa-search

@@ -1,0 +1,28 @@
+.nested-fields
+  %hr
+  %h4.header-title.m-l-10 Centre link payment
+  .col-12.card-box
+    = f.input :question_type, input_html: {value: 'centre_link_payment'}, as: :hidden
+    .form-group.row
+      %label{for: 'payment_name', class: 'col-2 col-form-label'}
+        Payment Name
+        %span.text-danger
+      .col-3
+        = f.input :payment_name, label: false, input_html: { class: 'form-control' }
+      %label{for: 'tax_withheld', class: 'col-2 col-form-label'}
+        Tax Withheld
+        %span.text-danger
+      .col-3
+        = f.input :tax_withheld, label: false, input_html: { class: 'form-control' }
+    .form-group.row
+      %label{for: 'gross_income', class: 'col-2 col-form-label'}
+        Gross Income
+        %span.text-danger
+      .col-3
+        = f.input :gross_income, label: false, input_html: { class: 'form-control' }
+      %label{for: 'other', class: 'col-2 col-form-label'}
+        Other
+        %span.text-danger
+      .col-3
+        = f.input :other, label: false, input_html: { class: 'form-control' }
+    = link_to_remove_association "remove", f, class: 'btn btn-danger btn-rounded'

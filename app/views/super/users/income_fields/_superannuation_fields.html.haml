@@ -1,0 +1,34 @@
+.nested-fields
+  %hr
+  %h4.header-title.m-l-10 Superannuation
+  .col-12.card-box
+    = f.input :question_type, input_html: {value: 'superannuation'}, as: :hidden
+    .form-group.row
+      %label{for: 'fund_name', class: 'col-2 col-form-label'}
+        Fund Name
+        %span.text-danger
+      .col-3
+        = f.input :fund_name, label: false, input_html: { class: 'form-control' }
+      %label{for: 'tax_withheld', class: 'col-2 col-form-label'}
+        Tax Withheld
+        %span.text-danger
+      .col-3
+        = f.input :tax_withheld, label: false, input_html: { class: 'form-control' }
+    .form-group.row
+      %label{for: 'taxed_element', class: 'col-2 col-form-label'}
+        Tax Element
+        %span.text-danger
+      .col-3
+        = f.input :taxed_element, label: false, input_html: { class: 'form-control' }
+      %label{for: 'untaxed_element', class: 'col-2 col-form-label'}
+        Untaxed Element
+        %span.text-danger
+      .col-3
+        = f.input :untaxed_element, label: false, input_html: { class: 'form-control' }
+    .form-group.row
+      %label{for: 'other', class: 'col-2 col-form-label'}
+        Other
+        %span.text-danger
+      .col-3
+        = f.input :other, label: false, input_html: { class: 'form-control' }
+    = link_to_remove_association "remove", f, class: 'btn btn-danger btn-rounded'

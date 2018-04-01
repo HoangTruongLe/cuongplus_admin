@@ -1,0 +1,34 @@
+.nested-fields
+  %hr
+  %h4.header-title.m-l-10 Share dividends
+  .col-12.card-box
+    = f.input :question_type, input_html: {value: 'share_dividends'}, as: :hidden
+    .form-group.row
+      %label{for: 'share_name', class: 'col-2 col-form-label'}
+        Share Name
+        %span.text-danger
+      .col-3
+        = f.input :share_name, label: false, input_html: { class: 'form-control' }
+      %label{for: 'unfranked_amount', class: 'col-2 col-form-label'}
+        Unfranked Amount
+        %span.text-danger
+      .col-3
+        = f.input :unfranked_amount, label: false, input_html: { class: 'form-control' }
+    .form-group.row
+      %label{for: 'franked_amount', class: 'col-2 col-form-label'}
+        Franked Amount
+        %span.text-danger
+      .col-3
+        = f.input :franked_amount, label: false, input_html: { class: 'form-control' }
+      %label{for: 'franking_credit', class: 'col-2 col-form-label'}
+        Franking Credit
+        %span.text-danger
+      .col-3
+        = f.input :franking_credit, label: false, input_html: { class: 'form-control' }
+    .form-group.row
+      %label{for: 'other', class: 'col-2 col-form-label'}
+        Other
+        %span.text-danger
+      .col-3
+        = f.input :other, label: false, input_html: { class: 'form-control' }
+    = link_to_remove_association "remove", f, class: 'btn btn-danger btn-rounded'

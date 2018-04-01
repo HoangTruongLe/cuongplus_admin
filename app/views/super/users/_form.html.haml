@@ -1,0 +1,34 @@
+= simple_form_for [:super, user], html: { novalidate: true } do |f|
+  .form-group.row.card-box
+    %label{for: 'firstName', class: 'col-3 col-form-label'}
+      First Name
+      %span.text-danger *
+    .col-4
+      = f.input :first_name, label: false, input_html: { class: 'form-control' }
+  .form-group.row.card-box
+    %label{for: 'lastName', class: 'col-3 col-form-label'}
+      Last Name
+      %span.text-danger *
+    .col-4
+      = f.input :last_name, label: false, input_html: { class: 'form-control' }
+  .form-group.row.card-box
+    %label{for: 'email', class: 'col-3 col-form-label'}
+      Email
+      %span.text-danger *
+    .col-4
+      = f.input :email, label: false, input_html: { class: 'form-control' }
+  .form-group.row.card-box
+    %label{for: 'password', class: 'col-3 col-form-label'}
+      Password
+      %span.text-danger *
+    .col-4
+      = f.input :password, label: false, input_html: { class: 'form-control', autocomplete: 'off' }
+  .form-group.row.card-box
+    %label{for: 'password', class: 'col-3 col-form-label'}
+      Password Confirmation
+      %span.text-danger *
+    .col-4
+      = f.input :password_confirmation, label: false, input_html: { class: 'form-control', autocomplete: 'off' }
+  .form-group.row
+    .col-12
+      = f.submit :save, class: 'btn btn-primary pull-right'

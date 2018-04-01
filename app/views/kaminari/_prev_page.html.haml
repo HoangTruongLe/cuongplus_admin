@@ -1,0 +1,2 @@
+%li.paginate_button.page-item.previous
+  = link_to_unless current_page.first?, raw(t 'views.pagination.previous'), url, :class => "page-link", :rel => 'prev', :remote => remote

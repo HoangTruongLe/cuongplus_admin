@@ -1,0 +1,51 @@
+.nested-fields
+  %hr
+  %h4.header-title.m-l-10 Salary OR Wage
+  .col-12.card-box
+    = f.input :question_type, input_html: {value: 'salary_or_wage'}, as: :hidden
+    .form-group.row
+      %label{for: 'occupation', class: 'col-2 col-form-label'}
+        Occupation
+        %span.text-danger
+      .col-3
+        = f.input :occupation, label: false, input_html: { class: 'form-control' }
+    .form-group.row
+      %label{for: 'employer_abn', class: 'col-2 col-form-label'}
+        Employer ABN
+        %span.text-danger
+      .col-3
+        = f.input :employer_abn, label: false, input_html: { class: 'form-control' }
+      %label{for: 'employer_name', class: 'col-2 col-form-label'}
+        Employer Name
+        %span.text-danger
+      .col-3
+        = f.input :employer_name, label: false, input_html: { class: 'form-control' }
+    .form-group.row
+      %label{for: 'tax_withheld', class: 'col-2 col-form-label'}
+        Tax Withheld
+        %span.text-danger
+      .col-3
+        = f.input :tax_withheld, label: false, input_html: { class: 'form-control' }
+      %label{for: 'gross_income', class: 'col-2 col-form-label'}
+        Gross Income
+        %span.text-danger
+      .col-3
+        = f.input :gross_income, label: false, input_html: { class: 'form-control' }
+    .form-group.row
+      %label{for: 'allowance', class: 'col-2 col-form-label'}
+        Allowance
+        %span.text-danger
+      .col-3
+        = f.input :allowance, label: false, input_html: { class: 'form-control' }
+      %label{for: 'fringe_benefit_amount', class: 'col-2 col-form-label'}
+        Fringe Benefit Amount
+        %span.text-danger
+      .col-3
+        = f.input :fringe_benefit_amount, label: false, input_html: { class: 'form-control' }
+    .form-group.row
+      %label{for: 'other', class: 'col-2 col-form-label'}
+        Other
+        %span.text-danger
+      .col-3
+        = f.input :other, label: false, input_html: { class: 'form-control' }
+    = link_to_remove_association "remove", f, class: 'btn btn-danger btn-rounded'

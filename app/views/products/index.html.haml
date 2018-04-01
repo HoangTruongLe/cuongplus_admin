@@ -1,0 +1,49 @@
+%div.row
+  %div.col-sm-12
+    %div.page-title-box
+      %h4.page-title Product
+      %ol.breadcrumb.float-right
+        %li.breadcrumb-item.active
+          %a{href: '/'}
+      %div.clearfix
+    .box-body.row
+      .col-lg-6
+        .form-group.area-add
+          = link_to 'Add New', new_product_path, class: 'btn btn-primary'
+          = link_to 'Clear Serch', products_path, class: 'btn btn-info'
+      .col-lg-6
+        = form_tag products_path, method: :get do
+          .form-group.area-keyword
+            .input-group.div-flex
+              = text_field_tag :term, params[:term], class: 'form-control'
+              .text-right
+                = submit_tag 'Search', class: 'btn btn-primary pull-right ml-1'
+    .box-body
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th
+              ID
+            %th
+              Name
+            %th
+              Price
+            %th
+              Product Type
+            %th
+            %th
+
+        %tbody
+          - @products.each do |product|
+            %tr
+              %td= product.id
+              %td= product.name
+              %td= product.price
+              %td= product.product_type.name
+              %td= link_to '', edit_product_path(product), class: 'fa fa-edit'
+              %td
+                - if can? :delete, product
+                  = link_to '', product_path(product), class: 'fa fa-times', method: :delete, data: { confirm: 'Are you sure?' }
+    .box-footer.clearfix
+      %ul.pagination.pagination-sm.no-margin.pull-right
+        = paginate @products

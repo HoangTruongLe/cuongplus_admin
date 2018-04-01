@@ -1,0 +1,39 @@
+.nested-fields
+  %hr
+  %h4.header-title.m-l-10 Sell any shares
+  .col-12.card-box
+    = f.input :question_type, input_html: {value: 'sell_any_shares'}, as: :hidden
+    .form-group.row
+      %label{for: 'share_name', class: 'col-2 col-form-label'}
+        Share Name
+        %span.text-danger
+      .col-3
+        = f.input :share_name, label: false, input_html: { class: 'form-control' }
+      %label{for: 'cost', class: 'col-2 col-form-label'}
+        Cost
+        %span.text-danger
+      .col-3
+        = f.input :cost, label: false, input_html: { class: 'form-control' }
+    .form-group.row
+      %label{for: 'sale_price', class: 'col-2 col-form-label'}
+        Sale Price
+        %span.text-danger
+      .col-3
+        = f.input :sale_price, label: false, input_html: { class: 'form-control' }
+    .form-group.row
+      %label{for: 'date_of_acquisition', class: 'col-2 col-form-label'}
+        Date Of Acquisition
+        %span.text-danger
+      .col-10.form-inline
+        = f.input :date_of_acquisition, as: :date, start_year: Date.today.year - 90,
+                                  end_year: Date.today.year, discard_day: false,
+                                  order: [:day, :month, :year], label: false, input_html: { class: 'form-control col-5' }
+    .form-group.row
+      %label{for: 'date_of_sale', class: 'col-2 col-form-label'}
+        Date Of Sale
+        %span.text-danger
+      .col-10.form-inline
+        = f.input :date_of_sale, as: :date, start_year: Date.today.year - 90,
+                                  end_year: Date.today.year, discard_day: false,
+                                  order: [:day, :month, :year], label: false, input_html: { class: 'form-control col-5' }
+    = link_to_remove_association "remove", f, class: 'btn btn-danger btn-rounded'

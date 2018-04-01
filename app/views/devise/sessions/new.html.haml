@@ -1,0 +1,28 @@
+%div.wrapper-page
+  %div.text-center
+    %a{class:'logo-lg', href: '#'}
+      %i.mdi.mdi-radar
+        %span CuongPlus
+  = render 'layouts/messages'
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    %div.form-group.row
+      %div.col-12
+        %div.input-group
+          %span.input-group-addon
+            %i.mdi.mdi-account
+          = f.email_field :email, autofocus: true, class: 'form-control', placeholder: "Email"
+    %div.form-group.row
+      %div.col-12
+        %div.input-group
+          %span.input-group-addon
+            %i.mdi.mdi-radar
+          = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: "Password"
+    %div.form-group.row
+      %div.col-12
+        %div.checkbox.checkbox-primary
+          = f.check_box :remember_me, id: "checkbox-signup"
+          %label{for: "checkbox-signup"} Remember me
+    %div.form-group.text-right.m-t-20
+      %div.col-12
+        %button.btn.btn-primary.btn-custom.w-md.waves-effect.waves-light{:type => "submit"} Sign In
+    = render "devise/shared/links"

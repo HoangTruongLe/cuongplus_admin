@@ -1,0 +1,11 @@
+%hr
+%h4.header-title.m-l-10 Trust or partnership
+.col-12.card-box
+  .nested-fields
+    = f.input :question_type, input_html: {value: 'trust_or_partnership_distributions'}, as: :hidden
+    .form-group.row
+      %label{for: 'list_details', class: 'col-2 col-form-label'}
+        List Details
+        %span.text-danger
+      .col-3
+        = f.input :list_details, as: :text, label: false, input_html: { class: 'form-control' }

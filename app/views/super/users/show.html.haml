@@ -1,0 +1,10 @@
+%section.content
+  .box
+    .box-header.with-border
+      %h3.box-title User
+    .box-body
+      = labeled_data_paragraph 'Email', @user.email
+      = labeled_data_paragraph 'First Name', @user.first_name
+      = labeled_data_paragraph 'Last Name', @user.last_name
+      = link_to 'Back', super_users_path, class: 'btn btn-primary'
+      = link_to 'Edit', edit_super_user_path(@user), class: 'btn btn-primary'

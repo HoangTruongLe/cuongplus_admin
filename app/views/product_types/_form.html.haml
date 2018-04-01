@@ -1,0 +1,10 @@
+.col-lg-12
+  = simple_form_for  @product_type do |f|
+    .form-group.row
+      %label{for: 'name', class: 'col-1 col-form-label'}
+        Name
+      .col-8
+        = f.input :name, label: false, input_html: { class: 'form-control' }
+    .form-group.row
+      .col-9
+        = f.submit :save, class: 'btn btn-primary pull-right'

@@ -1,0 +1,6 @@
+- if page.current?
+  %li.active.paginate_button.page-item
+    = content_tag :a, page,  :class => 'page-link', remote: remote, rel: (page.next? ? 'next' : (page.prev? ? 'prev' : nil))
+- else
+  %li.paginate_button.page-item
+    = link_to page, url, :class =>  'page-link', remote: remote, rel: (page.next? ? 'next' : (page.prev? ? 'prev' : nil))
