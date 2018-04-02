@@ -9,7 +9,7 @@
       %label{for: 'price', class: 'col-2 col-form-label'}
         Price
       .col-7
-        = f.input :price, as: :string, label: false, input_html: { class: 'form-control', id: 'product_price' }, data: {autonumeric: {aSign: 'USD ', mDec: 0}}
+        = f.input :price, as: :string, label: false, input_html: { class: 'form-control', id: 'product_price' }
     .form-group.row
       %label{for: 'product_type', class: 'col-2 col-form-label'}
         Product Type
@@ -28,3 +28,7 @@
     .form-group.row
       .col-9
         = f.submit :save, class: 'btn btn-primary pull-right'
+:javascript
+  $(document).ready(function(){
+    new AutoNumeric('#product_price', { currencySymbol : '', decimalPlaces: '0' });
+  })

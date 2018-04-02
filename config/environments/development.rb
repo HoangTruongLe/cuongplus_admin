@@ -65,10 +65,10 @@ Rails.application.configure do
   config.paperclip_defaults = {
     storage: :s3,
     s3_credentials: {
-      bucket: 'ez-portal-dev',
-      access_key_id: 'AKIAIIWNDQHC4CLVVUEQ',
-      secret_access_key: '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',
-      s3_region: 'ap-southeast-1',
+      bucket: 'cuongdev',
+      access_key_id: 'AKIAIJWKM6SCYT7P7H2Q',
+      secret_access_key: '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',
+      s3_region: 'us-west-1',
     }
   }
 end

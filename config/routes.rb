@@ -17,11 +17,8 @@ Rails.application.routes.draw do
     resources :profiles, path: 'profile'
   end
 
-  # make default controller
-  get 'dashboard' => 'index#index'
-
-  # make authentication
   devise_for :users
 
+  get '/index', to: 'index#index'
   root 'index#index'
 end

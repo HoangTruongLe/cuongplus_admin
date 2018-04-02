@@ -10,7 +10,7 @@
       .col-lg-6
         .form-group.area-add
           = link_to 'Add New', new_product_path, class: 'btn btn-primary'
-          = link_to 'Clear Serch', products_path, class: 'btn btn-info'
+          = link_to 'Clear Search', products_path, class: 'btn btn-primary'
       .col-lg-6
         = form_tag products_path, method: :get do
           .form-group.area-keyword
@@ -38,7 +38,7 @@
             %tr
               %td= product.id
               %td= product.name
-              %td= product.price
+              %td= format_currency(product.price)
               %td= product.product_type.name
               %td= link_to '', edit_product_path(product), class: 'fa fa-edit'
               %td

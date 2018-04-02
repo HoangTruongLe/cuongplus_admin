@@ -29,5 +29,8 @@
 //= require autonumeric
 //= require dropzone
 //= require ezy
+//= require agency
+//= require contact_me.min
+//= require jqBootstrapValidation.min
 
 //= require_tree .

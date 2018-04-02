@@ -1,11 +1,13 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+
 
   # GET /products
   # GET /products.json
   def index
     @q = Product.ransack(params[:q])
-    @products = @q.result().page(params[:page]).per(20)
+    @products =  @q.result().page(params[:page]).per(20)
   end
 
   # GET /products/1
@@ -28,8 +30,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     respond_to do |format|
-      byebug
-      if @product.save!
+      if @product.save
         format.html { redirect_to products_url, notice: 'Product was successfully created.' }
         format.json { redirect_to products_url, status: :created, location: @product }
       else
@@ -68,9 +69,9 @@ class ProductsController < ApplicationController
     def set_product
       @product = Product.find(params[:id])
     end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
+      params[:product][:price] = params[:product][:price].gsub(',', '').to_i
       params.require(:product).permit(:name, :price, :product_type_id,
         :upload_files_attributes => [:id, :file, :_destroy])
     end

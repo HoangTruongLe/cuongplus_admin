@@ -1,7 +1,6 @@
 class IndexController < ApplicationController
-  before_action :authenticate_user!
-
   def index
-    @dashboard_messages = DashboardMessage.order('created_at DESC').page(params[:page])
+    @q = Product.ransack(params[:q])
+    @products = @q.result().includes(:product_type).page(params[:page]).per(15)
   end
 end
