@@ -70,6 +70,11 @@ class ProductTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_type_params
-      params.require(:product_type).permit(:name)
+      params.require(:product_type).permit(:name, :provider, :os, :language, :screen_type,
+        :color, :resolution, :screen_size, :font_camera, :back_camera, :flash,
+        :video_mode, :video_call, :cpu, :ram, :chipset, :address_memory, :maximum_memory,
+        :built_in_memory, :extra_memory, :weight, :size, :battery_capacity, :c3g, :c4g,
+        :bluetooth, :gprs, :gps, :usb, :sim_card_port, :sim_card, :wifi, :video_player,
+        :mp3_player, :fm_radio, :recoder, :description)
     end
 end

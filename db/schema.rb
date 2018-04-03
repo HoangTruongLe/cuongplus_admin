@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180330080500) do
+ActiveRecord::Schema.define(version: 20180403071330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,42 @@ ActiveRecord::Schema.define(version: 20180330080500) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "provider"
+    t.string "os"
+    t.string "language"
+    t.string "screen_type"
+    t.string "color"
+    t.string "resolution"
+    t.string "screen_size"
+    t.string "font_camera"
+    t.string "back_camera"
+    t.string "flash"
+    t.string "video_mode"
+    t.string "video_call"
+    t.string "cpu"
+    t.string "ram"
+    t.string "chipset"
+    t.string "address_memory"
+    t.string "maximum_memory"
+    t.string "built_in_memory"
+    t.string "extra_memory"
+    t.string "weight"
+    t.string "size"
+    t.string "battery_capacity"
+    t.string "c3g"
+    t.string "c4g"
+    t.string "bluetooth"
+    t.string "gprs"
+    t.string "gps"
+    t.string "usb"
+    t.string "sim_card_port"
+    t.string "sim_card"
+    t.string "wifi"
+    t.string "video_player"
+    t.string "mp3_player"
+    t.string "fm_radio"
+    t.string "recoder"
+    t.text "description"
   end
 
   create_table "products", force: :cascade do |t|
@@ -66,6 +102,8 @@ ActiveRecord::Schema.define(version: 20180330080500) do
     t.bigint "product_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "draft", default: true
+    t.integer "status"
     t.index ["product_type_id"], name: "index_products_on_product_type_id"
   end
 

@@ -1,34 +1,113 @@
 .col-lg-12
   = simple_form_for  @product do |f|
-    .form-group.row
-      %label{for: 'name', class: 'col-2 col-form-label'}
-        Name
-      .col-7
-        = f.input :name, label: false, input_html: { class: 'form-control' }
-    .form-group.row
-      %label{for: 'price', class: 'col-2 col-form-label'}
-        Price
-      .col-7
-        = f.input :price, as: :string, label: false, input_html: { class: 'form-control', id: 'product_price' }
-    .form-group.row
-      %label{for: 'product_type', class: 'col-2 col-form-label'}
-        Product Type
-      .col-7
-        = f.input :product_type_id, collection: ProductType.all.map{ |p| [p.name, p.id]}, include_blank: true, label: false, input_html: { class: 'form-control' }
-    .form-group.row
-      .col-9
-        = f.simple_fields_for :upload_files do |file|
-          .nested_attr_wraper
-            = render "upload_files_fields", f: file
-        .nested_attr_wraper
-          .links
-            = link_to_add_association 'Add File', f, :upload_files,
-              partial: "upload_files_fields",
-              class: "btn btn-primary"
-    .form-group.row
-      .col-9
+    .row.card-box
+      .col-12
+        %h4 General Information
+      .col-6
+        .form-group.row
+          %label{for: 'name', class: 'col-4 col-form-label'}
+            Name
+          .col-8
+            = f.input :name, label: false, input_html: { class: 'form-control' }
+        .form-group.row
+          %label{for: 'price', class: 'col-4 col-form-label'}
+            Price
+          .col-8
+            = f.input :price, as: :string, label: false, input_html: { class: 'form-control', id: 'product_price' }
+
+      .col-6
+        .form-group.row
+          %label{for: 'product_type', class: 'col-4 col-form-label'}
+            Product Type
+          .col-8
+            = f.input :product_type_id, collection: ProductType.all.map{ |p| [p.name, p.id]}, include_blank: true, label: false, input_html: { class: 'form-control' }
+        .form-group.row
+          %label{for: 'status', class: 'col-4 col-form-label'}
+            Product Status
+          .col-8
+            = f.input :status, collection: Product::STATUS,
+            :label_method => :last, :value_method => :first, include_blank: true,
+            label: false, input_html: { class: 'form-control' }
+    .form-group.row.card-box
+      %label{for: 'images', class: 'col-2 col-form-label'}
+        Images
+      .col-10
+        .m_editor-photo-wrapper
+          .dropzone.dropzone-previews.needsclick{:id => "upload_zone"}
+            .dz-default.dz-message.needsclick
+              %span Dropzone
+              %br/
+              %h5 Drag and drop images into this area
+          %div{:style => "clear: both"}
+
+    .form-group.row.card-box
+      .col-12
         = f.submit :save, class: 'btn btn-primary pull-right'
 :javascript
+  $('#froalaEditor').froalaEditor();
   $(document).ready(function(){
     new AutoNumeric('#product_price', { currencySymbol : '', decimalPlaces: '0' });
   })
+  Dropzone.autoDiscover = false;
+  var headlineDropzone = new Dropzone("#upload_zone", {
+    url: "/upload_photos/#{@product.id}/add_photo",
+    paramName: "upload_file[file]",
+    acceptedFiles: '.jpg, .png, .jpeg, .gif', // type of files
+    addRemoveLinks: true,
+    parallelUploads: 10,
+    maxFilesize: 10,
+    headers: {'X-CSRFToken': $('meta[name="csrf-token"]').attr('content')},
+    init: function () {
+      var dropzone = this
+      $.ajax({
+        type: "GET",
+        url: '/upload_photos/#{@product.id}/get_photos',
+        contentType: "application/json",
+        success: function (data) {
+          var mockupFiles = data
+          mockupFiles.photos.forEach(function (file) {
+            var mockFile = {
+              name: file.photo_file_name,
+              size: file.photo_file_size,
+              type: file.photo_content_type
+            };
+            headlineDropzone.options.addedfile.call(headlineDropzone, mockFile);
+            headlineDropzone.options.thumbnail.call(headlineDropzone, mockFile, file.image_url);
+            mockFile.previewElement.classList.add('dz-success');
+            mockFile.previewElement.classList.add('dz-complete');
+            $(mockFile.previewElement).find(".dz-remove").attr('id', file.id);
+          })
+        }
+      });
+    },
+    sending: function(){
+      $('#spinner').show();
+    },
+    queuecomplete: function(){
+      $('#spinner').hide();
+    },
+    success: function (file, response) {
+      $(file.previewElement).find(".dz-remove").attr('id', response.uploadId)
+      $(file.previewElement).addClass('dz-success')
+    },
+    removedfile: function (file) {
+      if (file.status != 'error'){
+        $('#spinner').show();
+        var dropzone = this
+        var id = $(file.previewTemplate).find('.dz-remove').attr('id');
+        $.ajax({
+          type: "DELETE",
+          url: '/upload_photos/' + id,
+          contentType: "application/json",
+          success: function (data) {
+            $('#image_' + id).parent().remove();
+            $('#spinner').hide();
+          }
+        });
+      }
+      var previewElement;
+      return (previewElement = file.previewElement) != null
+        ? (previewElement.parentNode.removeChild(file.previewElement))
+        : (void 0);
+    }
+  });

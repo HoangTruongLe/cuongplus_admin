@@ -9,6 +9,7 @@
     %script{:src => "https://cdn.jsdelivr.net/npm/autonumeric@4.1.0"}
     %title CuongPlus
     = csrf_meta_tags
+    = hidden_field_tag :authenticity_token, form_authenticity_token
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = analytics_init if Rails.env.production?
@@ -19,5 +20,6 @@
       %div.content-page
         %div.content
           %div.container-fluid
+            = render partial: 'application/spinner'
             = yield
         = render partial: 'layouts/footer'
