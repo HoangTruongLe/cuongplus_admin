@@ -9,3 +9,6 @@ default: &default
 development:
   <<: *default
   database: cuongplus_admin_dev
+production:
+  <<: *default
+  database: cuongplus_admin_prod
