@@ -23,3 +23,5 @@
 /vendor/bundle/
 ./config/application.yml
 public/system/
+config/database.yml
+config/secrets.yml
