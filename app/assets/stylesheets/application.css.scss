@@ -13,8 +13,7 @@
  *= require_self
  *= require dropzone/dropzone
  */
-@import "bootstrap-sprockets";
-@import "bootstrap";
+@import "bootstrap.min";
 @import 'icons';
 @import 'style';
 @import 'custom';
