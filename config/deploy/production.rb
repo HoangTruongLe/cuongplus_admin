@@ -54,8 +54,8 @@ server "34.216.217.198",
   roles: %w{web db app},
   ssh_options: {
     user: "ubuntu", # overrides user setting above
-    keys: %w(/home/user_name/.ssh/cuongplus.pem),
+    keys: %w(~/.ssh/cuongplus.pem),
     forward_agent: false,
-    auth_methods: %w(publickey password)
+    auth_methods: %w(publickey)
     # password: "please use keys"
   }

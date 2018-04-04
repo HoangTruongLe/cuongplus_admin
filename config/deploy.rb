@@ -1,9 +1,9 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.10.1"
 
-set :application, "cuongplus"
+set :application, "cuongplus_admin"
 set :repo_url, "git@github.com:HoangTruongLe/cuongplus_admin.git"
-set :deploy_to, '/home/deploy/cuongplus'
+set :deploy_to, '/home/ubuntu/cuongplus_admin'
 append :linked_files, "config/database.yml", "config/secrets.yml"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 
