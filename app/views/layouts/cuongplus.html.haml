@@ -7,12 +7,13 @@
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
     %title CuongPlus.vn
-    %link{:href => "https://fonts.googleapis.com/css?family=Montserrat:400,700", :rel => "stylesheet", :type => "text/css"}/
-    %link{:href => "https://fonts.googleapis.com/css?family=Kaushan+Script", :rel => "stylesheet", :type => "text/css"}/
-    %link{:href => "https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic", :rel => "stylesheet", :type => "text/css"}/
-    %link{:href => "https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "https://fonts.googleapis.com/css?family=Montserrat:400,700", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "https://fonts.googleapis.com/css?family=Kaushan+Script", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700", :rel => "stylesheet", :type => "text/css"}
     %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css", :rel => "stylesheet"}
     %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css", :rel => "stylesheet"}
+    %link{:href => "https://fonts.googleapis.com/css?family=Noto+Sans:400,700", :rel => "stylesheet", :type => "text/css"}
     %title CuongPlus
     = csrf_meta_tags
     = hidden_field_tag :authenticity_token, form_authenticity_token
@@ -36,6 +37,8 @@
             %li.nav-item
               %a.nav-link.js-scroll-trigger{:href => "#team"} Địa chỉ
             %li.nav-item
+              %a.nav-link.js-scroll-trigger{:href => "#maps"} Bản đồ
+            %li.nav-item
               %a.nav-link.js-scroll-trigger{:href => "#contact"} Liên Hệ
     / Header
     %header.masthead
@@ -43,153 +46,69 @@
         .intro-text
           .intro-lead-in Chuyên mua bán điện thoại giá tốt nhất thị trường
           %h2 iPhone, iPad, Apple watch, Samsung
-          %a.btn.btn-primary.btn-xl.text-uppercase.js-scroll-trigger{:href => "#services"} Sản Phẩm
+          %a.btn.btn-primary.btn-xl.text-uppercase.js-scroll-trigger{:href => "#portfolio"} Sản Phẩm
     %section#portfolio.bg-light
       .container
-        .row
-          .col-lg-12.text-center
-            %h3.section-heading.text-uppercase Danh sách sản phẩm hiện có tại cửa hàng
-          .col-lg-12.text-center
-            = search_form_for @q, url: index_path do |f|
-              .form-group.area-keyword
-                .input-group.div-flex
-                  = f.search_field :name_or_price_cont_any, placeholder: 'Nhập sản phẩm bạn muốn tìm, vd: iphone x ...', class: 'form-control'
-                  .text-right
-                    = f.submit 'Tìm kiếm', class: 'btn btn-primary pull-right ml-1'
         = yield
     / About
-    %section#about
+    %section#services
       .container
         .row
           .col-lg-12.text-center
-            %h2.section-heading.text-uppercase About
-            %h3.section-subheading.text-muted Lorem ipsum dolor sit amet consectetur.
-        .row
-          .col-lg-12
-            %ul.timeline
-              %li
-                .timeline-image
-                  %img.rounded-circle.img-fluid{:alt => "", :src => "img/about/1.jpg"}/
-                .timeline-panel
-                  .timeline-heading
-                    %h4 2009-2011
-                    %h4.subheading Our Humble Beginnings
-                  .timeline-body
-                    %p.text-muted Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!
-              %li.timeline-inverted
-                .timeline-image
-                  %img.rounded-circle.img-fluid{:alt => "", :src => "img/about/2.jpg"}/
-                .timeline-panel
-                  .timeline-heading
-                    %h4 March 2011
-                    %h4.subheading An Agency is Born
-                  .timeline-body
-                    %p.text-muted Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!
-              %li
-                .timeline-image
-                  %img.rounded-circle.img-fluid{:alt => "", :src => "img/about/3.jpg"}/
-                .timeline-panel
-                  .timeline-heading
-                    %h4 December 2012
-                    %h4.subheading Transition to Full Service
-                  .timeline-body
-                    %p.text-muted Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!
-              %li.timeline-inverted
-                .timeline-image
-                  %img.rounded-circle.img-fluid{:alt => "", :src => "img/about/4.jpg"}/
-                .timeline-panel
-                  .timeline-heading
-                    %h4 July 2014
-                    %h4.subheading Phase Two Expansion
-                  .timeline-body
-                    %p.text-muted Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!
-              %li.timeline-inverted
-                .timeline-image
-                  %h4
-                    Be Part
-                    = succeed "Of" do
-                      %br/
-                    = succeed "Story!" do
-                      %br/
-    / Team
+            %h2.section-heading.text-uppercase Dịch Vụ
+            %h3.section-subheading.text-muted Chuyên mua bán sửa chữa iPhone, iPad, Apple Watch, Samsung ...
+        .row.text-center
+          .col-md-4
+            %span.fa-stack.fa-4x
+              %i.fa.fa-circle.fa-stack-2x.text-primary
+              %i.fa.fa-shopping-cart.fa-stack-1x.fa-inverse
+            %h4.service-heading Mua Bán
+            %p.text-muted Mua, bán, trao đổi các loại điện thoại, máy tính bảng, smart watch ...
+          .col-md-4
+            %span.fa-stack.fa-4x
+              %i.fa.fa-circle.fa-stack-2x.text-primary
+              %i.fa.fa-laptop.fa-stack-1x.fa-inverse
+            %h4.service-heading Sửa chửa
+            %p.text-muted Sửa chửa, thay thế linh kiện, ép kính ...
+          .col-md-4
+            %span.fa-stack.fa-4x
+              %i.fa.fa-circle.fa-stack-2x.text-primary
+              %i.fa.fa-wrench.fa-stack-1x.fa-inverse
+            %h4.service-heading Bảo hành
+            %p.text-muted Đảm bảo các chính sách bảo hành chính hảng hoặc chính sách bảo hành của cửa hàng
+
     %section#team.bg-light
       .container
         .row
           .col-lg-12.text-center
-            %h2.section-heading.text-uppercase Our Amazing Team
-            %h3.section-subheading.text-muted Lorem ipsum dolor sit amet consectetur.
+            %h3.section-heading.text-uppercase Địa chỉ
+            %a{:href => "#"} 0902712712
         .row
-          .col-sm-4
+          .col-sm-12.text-center
             .team-member
-              %img.mx-auto.rounded-circle{:alt => "", :src => "img/team/1.jpg"}/
-              %h4 Kay Garland
-              %p.text-muted Lead Designer
+              %img.mx-auto.rounded-circle{:alt => "", :src => "https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.0-9/29683484_1787579971305562_7960054817416023658_n.jpg?_nc_cat=0&oh=01c83570dc4a8d230ae38be0d6a5d7f1&oe=5B34E807"}/
+              %h4 Cường Plus
+              %p.text-muted Shop Owner
               %ul.list-inline.social-buttons
                 %li.list-inline-item
-                  %a{:href => "#"}
-                    %i.fa.fa-twitter
-                %li.list-inline-item
-                  %a{:href => "#"}
+                  %a{:href => "https://www.facebook.com/cuongplus"}
                     %i.fa.fa-facebook
-                %li.list-inline-item
-                  %a{:href => "#"}
-                    %i.fa.fa-linkedin
-          .col-sm-4
-            .team-member
-              %img.mx-auto.rounded-circle{:alt => "", :src => "img/team/2.jpg"}/
-              %h4 Larry Parker
-              %p.text-muted Lead Marketer
-              %ul.list-inline.social-buttons
-                %li.list-inline-item
-                  %a{:href => "#"}
-                    %i.fa.fa-twitter
-                %li.list-inline-item
-                  %a{:href => "#"}
-                    %i.fa.fa-facebook
-                %li.list-inline-item
-                  %a{:href => "#"}
-                    %i.fa.fa-linkedin
-          .col-sm-4
-            .team-member
-              %img.mx-auto.rounded-circle{:alt => "", :src => "img/team/3.jpg"}/
-              %h4 Diana Pertersen
-              %p.text-muted Lead Developer
-              %ul.list-inline.social-buttons
-                %li.list-inline-item
-                  %a{:href => "#"}
-                    %i.fa.fa-twitter
-                %li.list-inline-item
-                  %a{:href => "#"}
-                    %i.fa.fa-facebook
-                %li.list-inline-item
-                  %a{:href => "#"}
-                    %i.fa.fa-linkedin
         .row
           .col-lg-8.mx-auto.text-center
-            %p.large.text-muted Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.
+            %p.large.text-muted 42 Lê Đình Lý - Đà Nẵng
     / Clients
-    %section.py-5
+    %section#maps
       .container
         .row
-          .col-md-3.col-sm-6
-            %a{:href => "#"}
-              %img.img-fluid.d-block.mx-auto{:alt => "", :src => "img/logos/envato.jpg"}/
-          .col-md-3.col-sm-6
-            %a{:href => "#"}
-              %img.img-fluid.d-block.mx-auto{:alt => "", :src => "img/logos/designmodo.jpg"}/
-          .col-md-3.col-sm-6
-            %a{:href => "#"}
-              %img.img-fluid.d-block.mx-auto{:alt => "", :src => "img/logos/themeforest.jpg"}/
-          .col-md-3.col-sm-6
-            %a{:href => "#"}
-              %img.img-fluid.d-block.mx-auto{:alt => "", :src => "img/logos/creative-market.jpg"}/
-    / Contact
+          .col-12.text-center
+            %h3 Google Maps
+            #map
     %section#contact
       .container
         .row
           .col-lg-12.text-center
-            %h2.section-heading.text-uppercase Contact Us
-            %h3.section-subheading.text-muted Lorem ipsum dolor sit amet consectetur.
+            %h2.section-heading.text-uppercase Liên hệ
+            %h3.section-subheading.text-muted Để lại thông tin liên hệ của bạn, chúng tôi sẽ liên lạc với bạn
         .row
           .col-lg-12
             %form#contactForm{:name => "sentMessage", :novalidate => ""}
@@ -217,7 +136,7 @@
       .container
         .row
           .col-md-4
-            %span.copyright Copyright © Your Website 2018
+            %span.copyright Copyright © htr.lee@gmail.com
           .col-md-4
             %ul.list-inline.social-buttons
               %li.list-inline-item
@@ -235,145 +154,6 @@
                 %a{:href => "#"} Privacy Policy
               %li.list-inline-item
                 %a{:href => "#"} Terms of Use
-    / Portfolio Modals
-    / Modal 1
-    #portfolioModal1.portfolio-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
-      .modal-dialog
-        .modal-content
-          .close-modal{"data-dismiss" => "modal"}
-            .lr
-              .rl
-          .container
-            .row
-              .col-lg-8.mx-auto
-                .modal-body
-                  / Project Details Go Here
-                  %h2.text-uppercase Project Name
-                  %p.item-intro.text-muted Lorem ipsum dolor sit amet consectetur.
-                  %img.img-fluid.d-block.mx-auto{:alt => "", :src => "img/portfolio/01-full.jpg"}/
-                  %p Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!
-                  %ul.list-inline
-                    %li Date: January 2017
-                    %li Client: Threads
-                    %li Category: Illustration
-                  %button.btn.btn-primary{"data-dismiss" => "modal", :type => "button"}
-                    %i.fa.fa-times
-                    Close Project
-    / Modal 2
-    #portfolioModal2.portfolio-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
-      .modal-dialog
-        .modal-content
-          .close-modal{"data-dismiss" => "modal"}
-            .lr
-              .rl
-          .container
-            .row
-              .col-lg-8.mx-auto
-                .modal-body
-                  / Project Details Go Here
-                  %h2.text-uppercase Project Name
-                  %p.item-intro.text-muted Lorem ipsum dolor sit amet consectetur.
-                  %img.img-fluid.d-block.mx-auto{:alt => "", :src => "img/portfolio/02-full.jpg"}/
-                  %p Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!
-                  %ul.list-inline
-                    %li Date: January 2017
-                    %li Client: Explore
-                    %li Category: Graphic Design
-                  %button.btn.btn-primary{"data-dismiss" => "modal", :type => "button"}
-                    %i.fa.fa-times
-                    Close Project
-    / Modal 3
-    #portfolioModal3.portfolio-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
-      .modal-dialog
-        .modal-content
-          .close-modal{"data-dismiss" => "modal"}
-            .lr
-              .rl
-          .container
-            .row
-              .col-lg-8.mx-auto
-                .modal-body
-                  / Project Details Go Here
-                  %h2.text-uppercase Project Name
-                  %p.item-intro.text-muted Lorem ipsum dolor sit amet consectetur.
-                  %img.img-fluid.d-block.mx-auto{:alt => "", :src => "img/portfolio/03-full.jpg"}/
-                  %p Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!
-                  %ul.list-inline
-                    %li Date: January 2017
-                    %li Client: Finish
-                    %li Category: Identity
-                  %button.btn.btn-primary{"data-dismiss" => "modal", :type => "button"}
-                    %i.fa.fa-times
-                    Close Project
-    / Modal 4
-    #portfolioModal4.portfolio-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
-      .modal-dialog
-        .modal-content
-          .close-modal{"data-dismiss" => "modal"}
-            .lr
-              .rl
-          .container
-            .row
-              .col-lg-8.mx-auto
-                .modal-body
-                  / Project Details Go Here
-                  %h2.text-uppercase Project Name
-                  %p.item-intro.text-muted Lorem ipsum dolor sit amet consectetur.
-                  %img.img-fluid.d-block.mx-auto{:alt => "", :src => "img/portfolio/04-full.jpg"}/
-                  %p Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!
-                  %ul.list-inline
-                    %li Date: January 2017
-                    %li Client: Lines
-                    %li Category: Branding
-                  %button.btn.btn-primary{"data-dismiss" => "modal", :type => "button"}
-                    %i.fa.fa-times
-                    Close Project
-    / Modal 5
-    #portfolioModal5.portfolio-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
-      .modal-dialog
-        .modal-content
-          .close-modal{"data-dismiss" => "modal"}
-            .lr
-              .rl
-          .container
-            .row
-              .col-lg-8.mx-auto
-                .modal-body
-                  / Project Details Go Here
-                  %h2.text-uppercase Project Name
-                  %p.item-intro.text-muted Lorem ipsum dolor sit amet consectetur.
-                  %img.img-fluid.d-block.mx-auto{:alt => "", :src => "img/portfolio/05-full.jpg"}/
-                  %p Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!
-                  %ul.list-inline
-                    %li Date: January 2017
-                    %li Client: Southwest
-                    %li Category: Website Design
-                  %button.btn.btn-primary{"data-dismiss" => "modal", :type => "button"}
-                    %i.fa.fa-times
-                    Close Project
-    / Modal 6
-    #portfolioModal6.portfolio-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
-      .modal-dialog
-        .modal-content
-          .close-modal{"data-dismiss" => "modal"}
-            .lr
-              .rl
-          .container
-            .row
-              .col-lg-8.mx-auto
-                .modal-body
-                  / Project Details Go Here
-                  %h2.text-uppercase Project Name
-                  %p.item-intro.text-muted Lorem ipsum dolor sit amet consectetur.
-                  %img.img-fluid.d-block.mx-auto{:alt => "", :src => "img/portfolio/06-full.jpg"}/
-                  %p Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!
-                  %ul.list-inline
-                    %li Date: January 2017
-                    %li Client: Window
-                    %li Category: Photography
-                  %button.btn.btn-primary{"data-dismiss" => "modal", :type => "button"}
-                    %i.fa.fa-times
-                    Close Project
 :javascript
   $(document).ready(function(){
     navbarCollapse();
@@ -381,6 +161,18 @@
       $(window).scroll(navbarCollapse);
     })
   })
+  function initMap() {
+
+    var uluru = {lat: 16.057369, lng: 108.2113765};
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 17,
+      center: uluru
+    });
+    var marker = new google.maps.Marker({
+      position: uluru,
+      map: map,
+    });
+  }
   function navbarCollapse() {
     if ($("#mainNav").offset().top > 100) {
       $("#mainNav").addClass("navbar-shrink");
@@ -388,3 +180,4 @@
       $("#mainNav").removeClass("navbar-shrink");
     }
   };
+%script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyB_Sp4QSRZCKClWpQ3nBS1rxzWgoZn95V4&callback=initMap"}

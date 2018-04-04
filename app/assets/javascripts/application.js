@@ -62,6 +62,7 @@
 //= require plugins/special_characters.min
 //= require plugins/url.min
 //= require plugins/video.min
+//= require jquery.slick
 
 //= require third_party/embedly.min
 //= require third_party/image_aviary.min
