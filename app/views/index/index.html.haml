@@ -1,16 +1,30 @@
-= render 'shared/page_header', title: 'Dashboard'
-
-.row.m-t-40
-  .col-lg-12.center-page
-    - @dashboard_messages.each do |dashboard_message|
-      %ul
-        %li{style:"padding-left:5px;"}
-          %p
-            = format_datetime_dmy(dashboard_message.updated_at) + ' - ' + dashboard_message.title
-            - if can? :update, dashboard_message
-              = link_to '', edit_super_dashboard_message_path(dashboard_message), class: 'fa fa-edit'
-          %p
-            = dashboard_message.body
-.box-footer.clearfix
-  %ul.pagination.pagination-sm.no-margin.pull-right
-    = paginate @dashboard_messages, outer_window: 3
+.row
+  .col-lg-12.text-center
+    %h3.section-heading.text-uppercase Danh sách sản phẩm hiện có tại cửa hàng
+  .col-lg-12.text-center
+    = search_form_for @q, url: index_path do |f|
+      .form-group.area-keyword
+        .input-group.div-flex
+          = f.search_field :name_or_price_cont_any, placeholder: 'Nhập sản phẩm bạn muốn tìm, vd: iphone x ...', class: 'form-control'
+          .text-right
+            = f.submit 'Tìm kiếm', class: 'btn btn-primary pull-right ml-1'
+.row
+  - @products.order(:updated_at => :desc).each do |p|
+    .col-md-4.col-sm-6.portfolio-item.text-center
+      %a.portfolio-link{:href => "#{product_details_path(p)}"}
+        .portfolio-hover
+          .portfolio-hover-content
+            %i.fa.fa-plus.fa-3x
+        - if p.upload_files.size > 0
+          %img.img-fluid.product_img{:alt => "", :src => p.upload_files.first.s3_path(:medium)}
+      .portfolio-caption
+        %h4
+          = p.name
+        %p.text-danger
+          Giá:
+          = format_currency(p.price)
+.row
+  .col-12
+    .box-footer.clearfix
+      %ul.pagination.pagination-sm.no-margin.pull-right
+        = paginate @products

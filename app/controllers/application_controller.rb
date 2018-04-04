@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  protect_from_forgery with: :null_session
   before_action :set_locale
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -27,7 +27,11 @@ class ApplicationController < ActionController::Base
     if is_public_controller?
       "devise"
     else
-      "application"
+      if self.class == IndexController
+        "cuongplus"
+      else
+        "application"
+      end
     end
   end
 
@@ -40,6 +44,6 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    dashboard_path
+    super_dashboard_messages_path
   end
 end

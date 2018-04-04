@@ -1,11 +1,13 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+
 
   # GET /products
   # GET /products.json
   def index
-    @q = Product.ransack(params[:q])
-    @products = @q.result().page(params[:page]).per(20)
+    @q = Product.is_not_draft.ransack(params[:q])
+    @products =  @q.result().page(params[:page]).per(20)
   end
 
   # GET /products/1
@@ -16,27 +18,12 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+    @product.save(validate: false)
+    redirect_to edit_product_path(@product)
   end
 
   # GET /products/1/edit
   def edit
-  end
-
-  # POST /products
-  # POST /products.json
-  def create
-    @product = Product.new(product_params)
-
-    respond_to do |format|
-      byebug
-      if @product.save!
-        format.html { redirect_to products_url, notice: 'Product was successfully created.' }
-        format.json { redirect_to products_url, status: :created, location: @product }
-      else
-        format.html { render :new }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /products/1
@@ -68,10 +55,10 @@ class ProductsController < ApplicationController
     def set_product
       @product = Product.find(params[:id])
     end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :price, :product_type_id,
-        :upload_files_attributes => [:id, :file, :_destroy])
+      params[:product][:price] = params[:product][:price].gsub(',', '').to_i
+      params.require(:product).permit(:name, :price, :product_type_id, :status,
+        :upload_files_attributes => [:id, :file, :_destroy]).merge(draft: false)
     end
 end

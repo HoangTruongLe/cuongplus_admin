@@ -30,6 +30,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  available: Có Hàng
+  unavailable: Hết Hàng
+  waiting: Đợi Order
   hello: "Hello world"
   views:
     pagination:
