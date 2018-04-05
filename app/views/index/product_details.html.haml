@@ -19,10 +19,10 @@
         .col-12
           %h3
             Giá:
-            = format_currency(@product.price)
+            = format_currency(@product.try(:price))
           %h5
-            Trả góp từ: 1.000.000đ
-            -# = format_currency(@product.instalment)
+            Trả góp từ:
+            = format_currency(@product.try(:instalment))
 
         .row
           .col-4
@@ -42,7 +42,7 @@
         %br
         .row
           .col-12
-            = sanitize(@product.product_type.description)
+            = sanitize(@product.product_type.try(:description))
   .col-lg-4
     .product_details
       .col-12
@@ -54,7 +54,7 @@
             %strong
               Nhà cung cấp
             %span
-              = @product.product_type.provider
+              = @product.product_type.try(:provider)
         .product_info_legend
           %h5 Thông tin chung
         %ul
@@ -62,12 +62,12 @@
             %strong
               Hệ điều hành
             %span
-              = @product.product_type.os
+              = @product.product_type.try(:os)
           %li
             %strong
               Ngôn Ngữ
             %span
-              = @product.product_type.language
+              = @product.product_type.try(:language)
         .product_info_legend
           %h5 màn hình
         %ul
@@ -75,22 +75,22 @@
             %strong
               Loại màn hình
             %span
-              = @product.product_type.screen_type
+              = @product.product_type.try(:screen_type)
           %li
             %strong
               Màu màn hình
             %span
-              = @product.product_type.color
+              = @product.product_type.try(:color)
           %li
             %strong
               Độ phân giải
             %span
-              = @product.product_type.resolution
+              = @product.product_type.try(:resolution)
           %li
             %strong
               Độ rộng màn hình
             %span
-              = @product.product_type.screen_size
+              = @product.product_type.try(:screen_size)
         .product_info_legend
           %h5 Chụp hình & Quay phim
         %ul
@@ -98,27 +98,27 @@
             %strong
               Camera sau
             %span
-              = @product.product_type.back_camera
+              = @product.product_type.try(:back_camera)
           %li
             %strong
               Camera trước
             %span
-              = @product.product_type.font_camera
+              = @product.product_type.try(:font_camera)
           %li
             %strong
               Đèn Flash
             %span
-              = @product.product_type.flash
+              = @product.product_type.try(:flash)
           %li
             %strong
               Quay phim
             %span
-              = @product.product_type.video_mode
+              = @product.product_type.try(:video_mode)
           %li
             %strong
               Video call
             %span
-              = @product.product_type.video_call
+              = @product.product_type.try(:video_call)
         .product_info_legend
           %h5 CPU & Ram
         %ul
@@ -126,17 +126,17 @@
             %strong
               Tốc độ CPU
             %span
-              = @product.product_type.cpu
+              = @product.product_type.try(:cpu)
           %li
             %strong
               Ram
             %span
-              = @product.product_type.ram
+              = @product.product_type.try(:ram)
           %li
             %strong
               Chipset
             %span
-              = @product.product_type.chipset
+              = @product.product_type.try(:chipset)
 
         .product_info_legend
           %h5 Bộ Nhớ
@@ -145,22 +145,22 @@
             %strong
               Danh bạ
             %span
-              = @product.product_type.address_memory
+              = @product.product_type.try(:address_memory)
           %li
             %strong
               Hổ trợ thẻ nhớ tối đa
             %span
-              = @product.product_type.maximum_memory
+              = @product.product_type.try(:maximum_memory)
           %li
             %strong
               Bộ nhớ trong
             %span
-              = @product.product_type.built_in_memory
+              = @product.product_type.try(:built_in_memory)
           %li
             %strong
               Thẻ nhớ ngoài
             %span
-              = @product.product_type.extra_memory
+              = @product.product_type.try(:extra_memory)
         .product_info_legend
           %h5 Kích Thước & Trọng Lượng
         %ul
@@ -168,12 +168,12 @@
             %strong
               Kích thước
             %span
-              = @product.product_type.size
+              = @product.product_type.try(:size)
           %li
             %strong
               Trọng lượng
             %span
-              = @product.product_type.weight
+              = @product.product_type.try(:weight)
 
         .product_info_legend
           %h5 Thông tin Pin
@@ -182,7 +182,7 @@
             %strong
               Dung lượng
             %span
-              = @product.product_type.battery_capacity
+              = @product.product_type.try(:battery_capacity)
         .product_info_legend
           %h5 Kết nối & Giao tiếp
         %ul
@@ -190,42 +190,42 @@
             %strong
               3G
             %span
-              = @product.product_type.c3g
+              = @product.product_type.try(:c3g)
           %li
             %strong
               4G
             %span
-              = @product.product_type.c4g
+              = @product.product_type.try(:c4g)
           %li
             %strong
               Bluetooth
             %span
-              = @product.product_type.bluetooth
+              = @product.product_type.try(:bluetooth)
           %li
             %strong
               GPRG
             %span
-              = @product.product_type.gprs
+              = @product.product_type.try(:gprs)
           %li
             %strong
               GPS
             %span
-              = @product.product_type.gps
+              = @product.product_type.try(:gps)
           %li
             %strong
               Khe cắm sim
             %span
-              = @product.product_type.sim_card_port
+              = @product.product_type.try(:sim_card_port)
           %li
             %strong
               Loại sim
             %span
-              = @product.product_type.sim_card
+              = @product.product_type.try(:sim_card)
           %li
             %strong
               Wifi
             %span
-              = @product.product_type.wifi
+              = @product.product_type.try(:wifi)
         .product_info_legend
           %h5 Giải trí
         %ul
@@ -233,22 +233,22 @@
             %strong
               Xem phim
             %span
-              = @product.product_type.video_player
+              = @product.product_type.try(:video_player)
           %li
             %strong
               Mp3
             %span
-              = @product.product_type.mp3_player
+              = @product.product_type.try(:mp3_player)
           %li
             %strong
               FM
             %span
-              = @product.product_type.fm_radio
+              = @product.product_type.try(:fm_radio)
           %li
             %strong
               Ghi âm
             %span
-              = @product.product_type.recoder
+              = @product.product_type.try(:recoder)
 
         .col-lg-6
 
