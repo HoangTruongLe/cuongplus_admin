@@ -14,6 +14,11 @@
             Price
           .col-8
             = f.input :price, as: :string, label: false, input_html: { class: 'form-control', id: 'product_price' }
+        .form-group.row
+          %label{for: 'instalment', class: 'col-4 col-form-label'}
+            Pay by instalment from
+          .col-8
+            = f.input :instalment, as: :string, label: false, input_html: { class: 'form-control', id: 'instalment' }
 
       .col-6
         .form-group.row
@@ -47,6 +52,7 @@
   $('#froalaEditor').froalaEditor();
   $(document).ready(function(){
     new AutoNumeric('#product_price', { currencySymbol : '', decimalPlaces: '0' });
+    new AutoNumeric('#instalment', { currencySymbol : '', decimalPlaces: '0' });
   })
   Dropzone.autoDiscover = false;
   var headlineDropzone = new Dropzone("#upload_zone", {

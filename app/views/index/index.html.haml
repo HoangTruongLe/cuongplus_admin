@@ -16,7 +16,17 @@
           .portfolio-hover-content
             %i.fa.fa-plus.fa-3x
         - if p.upload_files.size > 0
-          %img.img-fluid.product_img{:alt => "", :src => p.upload_files.first.s3_path(:medium)}
+          .product_images_wrapper
+            - if p.status == 'available'
+              .corner-ribbon.top-right.sticky.blue
+                = t(p.status)
+            - if p.status == 'waiting'
+              .corner-ribbon.top-right.sticky.green
+                = t(p.status)
+            - if p.status == 'unavailable'
+              .corner-ribbon.top-right.sticky.red
+                = t(p.status)
+            %img.img-fluid.product_img{:alt => "", :src => p.upload_files.first.s3_path(:medium)}
       .portfolio-caption
         %h4
           = p.name
