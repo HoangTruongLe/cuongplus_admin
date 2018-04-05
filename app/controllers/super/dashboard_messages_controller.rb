@@ -21,7 +21,7 @@ class Super::DashboardMessagesController < ApplicationController
   def create
     @dashboard_message = DashboardMessage.new(dashboard_message_params)
     if @dashboard_message.save
-      redirect_to dashboard_path, notice: 'Dashboard message was successfully created.'
+      redirect_to super_dashboard_messages_path, notice: 'Dashboard message was successfully created.'
     else
       render :new
     end
@@ -29,7 +29,7 @@ class Super::DashboardMessagesController < ApplicationController
 
   def update
     if @dashboard_message.update(dashboard_message_params)
-      redirect_to dashboard_path, notice: 'Dashboard message was successfully updated.'
+      redirect_to super_dashboard_messages_path, notice: 'Dashboard message was successfully updated.'
     else
       render :edit
     end
@@ -37,7 +37,7 @@ class Super::DashboardMessagesController < ApplicationController
 
   def destroy
     @dashboard_message.destroy
-    redirect_to dashboard_path, notice: 'Dashboard message was successfully destroyed.'
+    redirect_to super_dashboard_messages_path, notice: 'Dashboard message was successfully destroyed.'
   end
 
   private
