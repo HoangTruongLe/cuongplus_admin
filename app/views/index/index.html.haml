@@ -31,8 +31,9 @@
         %h4
           = p.name
         %p.text-danger
-          Giá:
-          = format_currency(p.price)
+          - if p.price
+            Giá:
+            = format_currency(p.price) 
 .row
   .col-12
     .box-footer.clearfix
