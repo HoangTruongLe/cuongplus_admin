@@ -1,0 +1,26 @@
+.row
+  - @products.order(:updated_at => :desc).each do |p|
+    .col-md-4.col-sm-6.portfolio-item.text-center
+      %a.portfolio-link{:href => "#{product_details_path(p)}"}
+        .portfolio-hover
+          .portfolio-hover-content
+            %i.fa.fa-plus.fa-3x
+        - if p.upload_files.size > 0
+          .product_images_wrapper
+            - if p.status == 'available'
+              .corner-ribbon.top-right.sticky.blue
+                = t(p.status)
+            - if p.status == 'waiting'
+              .corner-ribbon.top-right.sticky.green
+                = t(p.status)
+            - if p.status == 'unavailable'
+              .corner-ribbon.top-right.sticky.red
+                = t(p.status)
+            %img.img-fluid.product_img{:alt => "", :src => p.upload_files.first.s3_path(:medium)}
+      .portfolio-caption
+        %h4
+          = p.name
+        %p.text-danger
+          - if p.price
+            Giá:
+            = format_currency(p.price)

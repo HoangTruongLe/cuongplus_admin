@@ -1,11 +1,10 @@
 class ProductTypesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_product_type, only: [:show, :edit, :update, :destroy]
+  before_action :set_product_type, only: [:show, :edit, :update, :destroy, :copy]
+  before_action :set_query, only: [:index, :destroy]
   # GET /product_types
   # GET /product_types.json
   def index
-    @q = ProductType.ransack(params[:q])
-    @product_types = @q.result().page(params[:page]).per(20)
   end
 
   # GET /product_types/1
@@ -56,16 +55,23 @@ class ProductTypesController < ApplicationController
   # DELETE /product_types/1.json
   def destroy
     @product_type.destroy
-    respond_to do |format|
-      format.html { redirect_to product_types_url, notice: 'Product type was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+  end
+
+  def copy
+    new_product_type = @product_type.dup
+    new_product_type.save!
+    redirect_to edit_product_type_path(new_product_type)
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product_type
       @product_type = ProductType.find(params[:id])
+    end
+
+    def set_query
+      @q = ProductType.ransack(params[:q])
+      @product_types = @q.result().page(params[:page]).per(20)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

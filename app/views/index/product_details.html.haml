@@ -18,11 +18,13 @@
         .horizontal-line
         .col-12
           %h3
-            Giá:
-            = format_currency(@product.try(:price))
+            - if @product.price
+              Giá:
+              = format_currency(@product.try(:price))
           %h5
-            Trả góp từ:
-            = format_currency(@product.try(:instalment))
+            - if @product.instalment
+              Trả góp từ:
+              = format_currency(@product.try(:instalment))
 
         .row
           .col-4

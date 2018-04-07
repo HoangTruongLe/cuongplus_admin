@@ -7,7 +7,8 @@ class Product < ApplicationRecord
   scope :is_draft, -> { where(draft: true) }
   scope :is_not_draft, -> { where(draft: false) }
   scope :with_price_like, -> (q) { where('price LIKE ?', "%#{q}%") }
-  scope :with_type_like, -> (q) { includes(:product_type).where('product_types.name LIKE ?', "%#{q}%") }
+  scope :with_type_like, -> (q) { joins(:product_type).where('lower_unaccent(product_types.name) ILIKE lower_unaccent(?)', "%#{q}%") }
+  # scope :with_type_like, -> (q) { joins(:product_type).where('product_types.name ILIKE ?', "%#{q}%") }
 
   enum status: [:available, :unavailable, :waiting]
   STATUS = [[:available, 'Available'] ,[:unavailable, 'Unavailable'], [:waiting, 'Waiting']]
@@ -16,5 +17,7 @@ class Product < ApplicationRecord
     Arel.sql("to_char(\"#{table_name}\".\"price\", '99999999')")
   end
 
-  ransack_alias :typename, :product_types_name
+  ransacker :id do
+    Arel.sql("to_char(\"#{table_name}\".\"id\", '99999999')")
+  end
 end

@@ -1,13 +1,12 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :copy]
+  before_action :set_query, only: [:index, :destroy]
 
 
   # GET /products
   # GET /products.json
   def index
-    @q = Product.is_not_draft.ransack(params[:q])
-    @products =  @q.result().page(params[:page]).per(20)
   end
 
   # GET /products/1
@@ -40,14 +39,16 @@ class ProductsController < ApplicationController
     end
   end
 
+  def copy
+    new_product = @product.dup
+    new_product.save!
+    redirect_to edit_product_path(new_product)
+  end
+
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
     @product.destroy
-    respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   private
@@ -55,10 +56,16 @@ class ProductsController < ApplicationController
     def set_product
       @product = Product.find(params[:id])
     end
+
+    def set_query
+      @q = Product.is_not_draft.ransack(params[:q])
+      @products =  @q.result().page(params[:page]).per(20)
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params[:product][:price] = params[:product][:price].gsub(',', '').to_i
-      params[:product][:instalment] = params[:product][:instalment].gsub(',', '').to_i
+      params[:product] = params[:product].reject{|_, v| v.empty?}
+      params[:product][:price] = params[:product][:price].gsub(',', '').to_i if params[:product][:price]
+      params[:product][:instalment] = params[:product][:instalment].gsub(',', '').to_i if params[:product][:instalment]
       params.require(:product).permit(:name, :price, :product_type_id, :status, :instalment,
         :upload_files_attributes => [:id, :file, :_destroy]).merge(draft: false)
     end

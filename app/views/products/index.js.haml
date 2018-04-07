@@ -1,0 +1,2 @@
+$('#product_list').html('#{escape_javascript render(partial: "product_list")}');
+$('#paginator').html('#{escape_javascript(paginate(@products, :remote => true).to_s)}');
