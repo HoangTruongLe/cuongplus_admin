@@ -10,34 +10,16 @@
       .col-lg-6
         .form-group.area-add
           = link_to 'Add New', new_product_type_path, class: 'btn btn-primary'
-          = link_to 'Clear Search', product_types_path, class: 'btn btn-primary'
+          = link_to 'Clear Search','javascript: void(0)', onclick: 'clear_search()', class: 'btn btn-primary'
       .col-lg-6
-        = form_tag product_types_path, method: :get do
+        = search_form_for @q, remote: true, method: :get do |f|
           .form-group.area-keyword
             .input-group.div-flex
-              = text_field_tag :term, params[:term], class: 'form-control'
+              = f.search_field :name_cont_any, class: 'form-control search'
               .text-right
                 = submit_tag 'Search', class: 'btn btn-primary pull-right ml-1'
-    .box-body
-      %table.table.table-bordered
-        %thead
-          %tr
-            %th
-              ID
-            %th
-              Name
-            %th
-            %th
-
-        %tbody
-          - @product_types.each do |product_type|
-            %tr
-              %td= product_type.id
-              %td= product_type.name
-              %td= link_to '', edit_product_type_path(product_type), class: 'fa fa-edit'
-              %td
-                - if can? :delete, product_type
-                  = link_to '', product_type_path(product_type), class: 'fa fa-times', method: :delete, data: { confirm: 'Are you sure?' }
+    .box-body#product_types_list
+      = render 'product_types_list'
     .box-footer.clearfix
-      %ul.pagination.pagination-sm.no-margin.pull-right
-        = paginate @product_types
+      %ul.pagination.pagination-sm.no-margin.pull-right#product_types_list
+        = paginate @product_types, remote: true

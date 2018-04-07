@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
-  resources :products
-  resources :product_types
+  resources :products do
+    member do
+      get :copy
+    end
+  end
+  resources :product_types do
+    member do
+      get :copy
+    end
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :super do
