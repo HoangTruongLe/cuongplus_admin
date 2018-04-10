@@ -44,7 +44,7 @@
         %br
         .row
           .col-12
-            = sanitize(@product.product_type.try(:description))
+            = raw(@product.product_type.try(:description))
   .col-lg-4
     .product_details
       .col-12

@@ -66,7 +66,7 @@ class ProductsController < ApplicationController
       params[:product] = params[:product].reject{|_, v| v.empty?}
       params[:product][:price] = params[:product][:price].gsub(',', '').to_i if params[:product][:price]
       params[:product][:instalment] = params[:product][:instalment].gsub(',', '').to_i if params[:product][:instalment]
-      params.require(:product).permit(:name, :price, :product_type_id, :status, :instalment,
+      params.require(:product).permit(:name, :price, :product_type_id, :status, :instalment, :description,
         :upload_files_attributes => [:id, :file, :_destroy]).merge(draft: false)
     end
 end

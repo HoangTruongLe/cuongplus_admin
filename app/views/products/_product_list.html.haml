@@ -1,30 +1,30 @@
 %table.table.table-bordered
   %thead
     %tr
-      %th{style: 'width: 10%;'}
+      %th.text-center{style: 'width: 10%;'}
         = sort_link(@q, :id, {} , {remote: true})
       %th{style: 'width: 20%;'}
         = sort_link(@q, :name, {}, {remote: true})
       %th{style: 'width: 20%;'}
         = sort_link(@q, :price, {}, {remote: true})
       %th{style: 'width: 20%;'}
-        Product Type
-      %th{style: 'width: 10%;'} edit
-      %th{style: 'width: 10%;'} delete
-      %th{style: 'width: 10%;'} copy
+        Loại sản phẩm
+      %th.text-center{style: 'width: 10%;'} Sửa
+      %th.text-center{style: 'width: 10%;'} Xoá
+      %th.text-center{style: 'width: 10%;'} Copy
   %tbody
     - @products.each do |product|
       %tr
-        %td= product.id
+        %td.text-center= product.id
         %td= product.name
         %td= format_currency(product.price)
         %td= product.product_type.name
-        %td= link_to '', edit_product_path(product), class: 'fa fa-edit'
-        %td
+        %td.text-center= link_to '', edit_product_path(product), class: 'fa fa-edit'
+        %td.text-center
           - if can? :delete, product
             = link_to '', product_path(product), class: 'fa fa-times',
-             method: :delete, data: { confirm: 'Are you sure?' }, remote: true
-        %td
+             method: :delete, data: { confirm: 'Bạn có chắc chắn muốn xoá không?' }, remote: true
+        %td.text-center
           = link_to '', copy_product_path(product), class: 'fa fa-copy'
 :javascript
   $(document).on("confirm:complete", function(e, answer){

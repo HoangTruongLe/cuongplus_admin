@@ -2,54 +2,62 @@
   = simple_form_for  @product do |f|
     .row.card-box
       .col-12
-        %h4 General Information
+        %h4 Thông tin chung
       .col-6
         .form-group.row
           %label{for: 'name', class: 'col-4 col-form-label'}
-            Name
+            Tên
           .col-8
             = f.input :name, label: false, input_html: { class: 'form-control' }
         .form-group.row
           %label{for: 'price', class: 'col-4 col-form-label'}
-            Price
+            Giá
           .col-8
             = f.input :price, as: :string, label: false, input_html: { class: 'form-control', id: 'product_price' }
         .form-group.row
           %label{for: 'instalment', class: 'col-4 col-form-label'}
-            Pay by instalment from
+            Trả góp từ
           .col-8
             = f.input :instalment, as: :string, label: false, input_html: { class: 'form-control', id: 'instalment' }
 
       .col-6
         .form-group.row
           %label{for: 'product_type', class: 'col-4 col-form-label'}
-            Product Type
+            Loại sản phẩm
           .col-8
             = f.input :product_type_id, collection: ProductType.all.map{ |p| [p.name, p.id]}, include_blank: true, label: false, input_html: { class: 'form-control' }
         .form-group.row
           %label{for: 'status', class: 'col-4 col-form-label'}
-            Product Status
+            Tình trạng hàng
           .col-8
             = f.input :status, collection: Product::STATUS,
             :label_method => :last, :value_method => :first, include_blank: true,
             label: false, input_html: { class: 'form-control' }
     .form-group.row.card-box
       %label{for: 'images', class: 'col-2 col-form-label'}
-        Images
+        Hình ảnh
       .col-10
         .m_editor-photo-wrapper
           .dropzone.dropzone-previews.needsclick{:id => "upload_zone"}
             .dz-default.dz-message.needsclick
               %span Dropzone
               %br/
-              %h5 Drag and drop images into this area
+              %h5 Kéo thả để upload
           %div{:style => "clear: both"}
-
+    .form-group.row.card-box
+      .col-12
+        %h4 Mô tả
+      .col-12
+        = f.input :description, label: false, input_html: { class: 'form-control', id: 'froalaEditor' }
     .form-group.row.card-box
       .col-12
         = f.submit :save, class: 'btn btn-primary pull-right'
 :javascript
-  $('#froalaEditor').froalaEditor();
+  $('#froalaEditor').froalaEditor({
+    imageUploadMethod: 'POST',
+    imageUploadURL: '/upload_photos/upload_editor',
+  });
+
   $(document).ready(function(){
     new AutoNumeric('#product_price', { currencySymbol : '', decimalPlaces: '0' });
     new AutoNumeric('#instalment', { currencySymbol : '', decimalPlaces: '0' });

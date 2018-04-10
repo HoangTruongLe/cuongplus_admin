@@ -3,26 +3,26 @@
     .sidebar-inner.slimscrollleft
       #sidebar-menu
         %ul
-          %li.menu-title Main
+          %li.menu-title Thông Tin Chung
           %li
             %a{ class:'waves-effect waves-primary', href: super_dashboard_messages_path }
               %i.ti-home
-              %span Dashboard
+              %span Thông báo
         - if current_user.super_user?
           %ul
-            %li.menu-title Super User Only
+            %li.menu-title Quản Lý
             - if can? :manage, User
               %li
                 %a{ class:'waves-effect waves-primary', href: super_users_path }
-                  %i.ti-menu-alt
-                  %span Users
+                  %i.ti-user
+                  %span Người dùng
             - if can? :manage, ProductType
               %li
                 %a{ class:'waves-effect waves-primary', href: product_types_path }
-                  %i.ti-menu-alt
-                  %span Product Type
+                  %i.ti-package
+                  %span Loại sản phẩm
             - if can? :manage, Product
               %li
                 %a{ class:'waves-effect waves-primary', href: products_path }
-                  %i.ti-menu-alt
-                  %span Product
+                  %i.ti-tablet
+                  %span sản phẩm

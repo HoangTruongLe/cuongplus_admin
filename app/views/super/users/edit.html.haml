@@ -1,7 +1,7 @@
 %div.row
   %div.col-sm-12
     %div.page-title-box
-      %h4.page-title Edit User
+      %h4.page-title Sửa thông tin người dùng
       %ol.breadcrumb.float-right
         %li.breadcrumb-item.active
           %a{href: '/'}
@@ -11,7 +11,7 @@
         %ul.nav.nav-tabs.tabs-bordered
           %li.nav-item
             %a.nav-link{ href: '#user_basic_info', "data-toggle" => 'tab', class: "#{'active' if !@profile_updating && !@income_updating }" }
-              Account
+              Tài khoản
         .tab-content
           .tab-pane{ id: 'user_basic_info', class: "#{'active' if !@profile_updating && !@income_updating }" }
             = render 'form', user: @user

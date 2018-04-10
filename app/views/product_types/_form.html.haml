@@ -6,66 +6,66 @@
         .col-6
           .form-group.row
             %label{for: 'name', class: 'col-4 col-form-label'}
-              Type Name
+              Tên loại
             .col-8
               = f.input :name, label: false, input_html: { class: 'form-control' }
     .row.card-box
       .col-6
         .col-12
-          %h4 General Information
+          %h4 Thông tin chung
         .col-12
           .form-group.row
             %label{for: 'provider', class: 'col-4 col-form-label'}
-              Provider
+              Nhà cung cấp
             .col-8
               = f.input :provider, label: false, input_html: { class: 'form-control' }
           .form-group.row
             %label{for: 'os', class: 'col-4 col-form-label'}
-              OS
+              Hệ điều hành
             .col-8
               = f.input :os, label: false, input_html: { class: 'form-control' }
           .form-group.row
             %label{for: 'language', class: 'col-4 col-form-label'}
-              Language
+              Ngôn ngữ
             .col-8
               = f.input :language, label: false, input_html: { class: 'form-control' }
       .col-6
         .col-12
-          %h4 Screen Information
+          %h4 Thông số màn hình
         .col-12
           .form-group.row
             %label{for: 'screen_type', class: 'col-4 col-form-label'}
-              Screen Type
+              loại màn hình
             .col-8
               = f.input :screen_type, label: false, input_html: { class: 'form-control' }
           .form-group.row
             %label{for: 'color', class: 'col-4 col-form-label'}
-              Color
+              Màu sắc
             .col-8
               = f.input :color, label: false, input_html: { class: 'form-control' }
           .form-group.row
             %label{for: 'resolution', class: 'col-4 col-form-label'}
-              Resolution
+              Độ phân giải
             .col-8
               = f.input :resolution, label: false, input_html: { class: 'form-control' }
           .form-group.row
             %label{for: 'screen_size', class: 'col-4 col-form-label'}
-              Screen Size
+              Kích thước màn hình
             .col-8
               = f.input :screen_size, label: false, input_html: { class: 'form-control' }
     .row.card-box
       .col-6
         .col-12
-          %h4 Camera Information
+          %h4 Thông tin camera
         .col-12
           .form-group.row
             %label{for: 'font_camera', class: 'col-4 col-form-label'}
-              Front Camera
+              Camera trước
             .col-8
               = f.input :font_camera, label: false, input_html: { class: 'form-control' }
           .form-group.row
             %label{for: 'back_camera', class: 'col-4 col-form-label'}
-              Back Camera
+              Camera sau
             .col-8
               = f.input :back_camera, label: false, input_html: { class: 'form-control' }
           .form-group.row
@@ -75,7 +75,7 @@
               = f.input :flash, label: false, input_html: { class: 'form-control' }
           .form-group.row
             %label{for: 'video_mode', class: 'col-4 col-form-label'}
-              Video Mode
+              Quay phim
             .col-8
               = f.input :video_mode, label: false, input_html: { class: 'form-control' }
           .form-group.row
@@ -85,7 +85,7 @@
               = f.input :video_call, label: false, input_html: { class: 'form-control' }
       .col-6
         .col-12
-          %h4 CPU Information
+          %h4 Thông tin CPU
         .col-12
           .form-group.row
             %label{for: 'cpu', class: 'col-4 col-form-label'}
@@ -105,63 +105,63 @@
     .row.card-box
       .col-6
         .col-12
-          %h4 Memory Information
+          %h4 Thông tin bộ nhớ
         .col-12
           .form-group.row
             %label{for: 'address_memory', class: 'col-4 col-form-label'}
-              Address Memory
+              Bộ nhớ danh bạ
             .col-8
               = f.input :address_memory, label: false, input_html: { class: 'form-control' }
           .form-group.row
             %label{for: 'maximum_memory', class: 'col-4 col-form-label'}
-              Maximum Memory
+              Hổ trợ thẻ nhớ tối đa
             .col-8
               = f.input :maximum_memory, label: false, input_html: { class: 'form-control' }
           .form-group.row
             %label{for: 'built_in_memory', class: 'col-4 col-form-label'}
-              Built In Memory
+              Bộ nhớ trong
             .col-8
               = f.input :built_in_memory, label: false, input_html: { class: 'form-control' }
           .form-group.row
             %label{for: 'extra_memory', class: 'col-4 col-form-label'}
-              Extra Memory
+              Bộ nhớ ngoài
             .col-8
               = f.input :extra_memory, label: false, input_html: { class: 'form-control' }
       .col-6
         .col-12
-          %h4 Weightiness Information
+          %h4 Trọng lượng máy
         .col-12
           .form-group.row
             %label{for: 'weight', class: 'col-4 col-form-label'}
-              Weight
+              Trọng lượng
             .col-8
               = f.input :weight, label: false, input_html: { class: 'form-control' }
           .form-group.row
             %label{for: 'size', class: 'col-4 col-form-label'}
-              Size
+              kích thước
             .col-8
               = f.input :size, label: false, input_html: { class: 'form-control' }
         .col-12
-          %h4 Battery Information
+          %h4 Thông tin Pin
         .col-12
           .form-group.row
             %label{for: 'battery_capacity', class: 'col-4 col-form-label'}
-              Battery Capacity
+              Dung lượng pin
             .col-8
               = f.input :battery_capacity, label: false, input_html: { class: 'form-control' }
     .row.card-box
       .col-6
         .col-12
-          %h4 Connection Information
+          %h4 Thông tin kết nối
         .col-12
           .form-group.row
             %label{for: 'c3g', class: 'col-4 col-form-label'}
-              3G Connection
+              Kết nối 3G
             .col-8
               = f.input :c3g, label: false, input_html: { class: 'form-control' }
           .form-group.row
             %label{for: 'c4g', class: 'col-4 col-form-label'}
-              4G Connection
+              Kết nối 4G
             .col-8
               = f.input :c4g, label: false, input_html: { class: 'form-control' }
           .form-group.row
@@ -186,12 +186,12 @@
               = f.input :usb, label: false, input_html: { class: 'form-control' }
           .form-group.row
             %label{for: 'sim_card_port', class: 'col-4 col-form-label'}
-              Sim Card Port
+              Số khe cắm sim
             .col-8
               = f.input :sim_card_port, label: false, input_html: { class: 'form-control' }
           .form-group.row
             %label{for: 'sim_card', class: 'col-4 col-form-label'}
-              Sim card
+              Loại sim
             .col-8
               = f.input :sim_card, label: false, input_html: { class: 'form-control' }
           .form-group.row
@@ -201,31 +201,31 @@
               = f.input :wifi, label: false, input_html: { class: 'form-control' }
       .col-6
         .col-12
-          %h4 Utility Information
+          %h4 Đa phương tiện
         .col-12
           .form-group.row
             %label{for: 'video_player', class: 'col-4 col-form-label'}
-              Video Player
+              Chơi Video
             .col-8
               = f.input :video_player, label: false, input_html: { class: 'form-control' }
           .form-group.row
             %label{for: 'mp3_player', class: 'col-4 col-form-label'}
-              MP3 Player
+              Chơi nhạc
             .col-8
               = f.input :mp3_player, label: false, input_html: { class: 'form-control' }
           .form-group.row
             %label{for: 'fm_radio', class: 'col-4 col-form-label'}
-              FM Radio
+              Đài FM
             .col-8
               = f.input :fm_radio, label: false, input_html: { class: 'form-control' }
           .form-group.row
             %label{for: 'recoder', class: 'col-4 col-form-label'}
-              Recoder
+              Ghi âm
             .col-8
               = f.input :recoder, label: false, input_html: { class: 'form-control' }
     .form-group.row.card-box
       .col-12
-        %h4 Description
+        %h4 Mô tả
       .col-12
         = f.input :description, label: false, input_html: { class: 'form-control', id: 'froalaEditor' }
     .form-group.row.card-box

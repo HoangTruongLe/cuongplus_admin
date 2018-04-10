@@ -1,13 +1,13 @@
 = simple_form_for [:super, user], html: { novalidate: true } do |f|
   .form-group.row.card-box
     %label{for: 'firstName', class: 'col-3 col-form-label'}
-      First Name
+      Họ
       %span.text-danger *
     .col-4
       = f.input :first_name, label: false, input_html: { class: 'form-control' }
   .form-group.row.card-box
     %label{for: 'lastName', class: 'col-3 col-form-label'}
-      Last Name
+      Tên
       %span.text-danger *
     .col-4
       = f.input :last_name, label: false, input_html: { class: 'form-control' }
@@ -25,7 +25,7 @@
       = f.input :password, label: false, input_html: { class: 'form-control', autocomplete: 'off' }
   .form-group.row.card-box
     %label{for: 'password', class: 'col-3 col-form-label'}
-      Password Confirmation
+      Nhập lại password
       %span.text-danger *
     .col-4
       = f.input :password_confirmation, label: false, input_html: { class: 'form-control', autocomplete: 'off' }
