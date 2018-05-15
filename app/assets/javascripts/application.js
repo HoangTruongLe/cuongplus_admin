@@ -68,3 +68,5 @@
 //= require third_party/image_aviary.min
 //= require third_party/spell_checker.min
 //= require common
+//= require toastr
+//= require lazyload.min

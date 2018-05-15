@@ -54,6 +54,7 @@ gem 'faker', '~> 1.8', '>= 1.8.7'
 gem 'country_select', '~> 3.1', '>= 3.1.1'
 gem 'validates_email_format_of', '~> 1.6.3'
 gem "jsonb_accessor", "~> 1.0.0"
+gem 'rails-i18n'
 
 gem 'aws-sdk'
 gem 'aws-sdk-s3'
@@ -62,7 +63,7 @@ gem 'autonumeric-rails'
 gem 'dropzonejs-rails'
 gem "wysiwyg-rails"
 gem "jquery-slick-rails"
-
+gem 'toastr-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

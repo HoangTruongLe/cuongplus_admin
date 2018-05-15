@@ -1,17 +1,61 @@
-.row
-  .col-lg-12.text-center
-    %h3.section-heading.text-uppercase Danh sách sản phẩm hiện có tại cửa hàng
-  .col-lg-12.text-center
-    = search_form_for @q, remote: true, method: :get, url: index_path do |f|
-      .form-group.area-keyword
-        .input-group.div-flex
-          = f.search_field :name_or_price_cont_any, placeholder: 'Nhập sản phẩm bạn muốn tìm, vd: iphone x ...', class: 'form-control'
-          .text-right
-            = f.submit 'Tìm kiếm', class: 'btn btn-primary pull-right ml-1'
-#product_list
-  = render 'product_list'
-.row
-  .col-12
-    .box-footer.clearfix
-      %ul.pagination.pagination-sm.no-margin.pull-right#paginator
-        = paginate @products, remote: true
+- @category.product_types.order_by_position.each_with_index do |type, idx|
+  - products = type.products
+  - if products.count  > 0
+    .row
+      %div{class: "#{ idx.odd? ? 'chevron' : 'no-chevron' }"}
+        %a{href: '#', class: "product-type-name"}=type.name
+        %h4{class: "product-type-title"}=type.title
+        .container
+          .row
+            .col-xl-4.type-info  
+              .row
+                .col-2
+                  %div{class: "#{ idx.odd? ? 'hexagon-white' : 'hexagon' }"}
+                    %i.ti-camera
+                .col-10.text-left
+                  %h4 
+                    = type.try(:name) + " Camera"
+                  - if type.back_camera && type.font_camera
+                    %span
+                      = type.back_camera + " & " + type.font_camera
+            .col-xl-4.type-info  
+              .row
+                .col-2
+                  %div{class: "#{ idx.odd? ? 'hexagon-white' : 'hexagon' }"}
+                    %i.ti-save
+                .col-10.text-left
+                  %h4 Dung lượng & màu sắc
+                  - if type.built_in_memory && type.color
+                    %span
+                      = type.built_in_memory + ' & ' + type.color
+            .col-xl-4.type-info  
+              .row
+                .col-2
+                  %div{class: "#{ idx.odd? ? 'hexagon-white' : 'hexagon' }"}
+                    %i.ti-desktop
+                .col-10.text-left
+                  %h4 Màn hình
+                  - if type.screen_type && type.resolution && type.screen_size
+                    %span
+                      = type.screen_type + ' - ' + type.resolution + ' - ' + type.screen_size
+          .row.product-container
+            
+            .col-xl-6.mb-2
+              = image_tag type.s3_path(:sz1) if type.s3_path(:sz1)
+            .col-xl-6 
+              %table.table.table-bordered
+                %thead{class: "#{ idx.odd? ? 'table-chevron-head' : 'table-no-chevron-head' }"}
+                  %tr
+                    %th.text-center{style: 'width: 50%;'} Sản Phẩm
+                    %th.text-center{style: 'width: 25%;'} Giá
+                    - if products.instalment.count > 0
+                      %th.text-center{style: 'width: 25%;'} Trả Trước
+
+                %tbody{class: "#{ idx.odd? ? 'table-chevron-body' : 'table-no-chevron-body' }"}
+                  - products.order_by_position.each do |product|
+                    %tr
+                      %td.text-left
+                        %a{:href => "#{product_details_path(product)}", class: 'product-text'}= product.name
+                      %td.text-center= format_currency(product.price)
+                      - if products.instalment.count > 0
+                        %td.text-center= format_currency(product.instalment)

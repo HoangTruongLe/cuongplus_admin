@@ -1,7 +1,7 @@
 %div.row
   %div.col-sm-12
     %div.page-title-box
-      %h4.page-title Dashboard messages
+      %h4.page-title Thông báo
       %ol.breadcrumb.float-right
         %li.breadcrumb-item.active
           %a{href: '/'}
@@ -13,23 +13,19 @@
       %table.table.table-bordered
         %thead
           %tr
-            %th
+            %th.text-center{style: 'width: 10%'}
               ID
-            %th
-              title
-            %th
-              body
-            %th
-            %th
-
+            %th.text-center{style: 'width: 70%'}
+              Tiêu đề
+            %th{style: 'width: 10%'}
+            %th{style: 'width: 10%'}
         %tbody
           - @dashboard_messages.each do |dashboard_message|
             %tr
-              %td= dashboard_message.id
+              %td.text-center= dashboard_message.id
               %td= dashboard_message.title
-              %td= dashboard_message.body
-              %td= link_to '', edit_super_dashboard_message_path(dashboard_message), class: 'fa fa-edit'
-              %td
+              %td.text-center= link_to '', edit_super_dashboard_message_path(dashboard_message), class: 'fa fa-edit'
+              %td.text-center
                 - if can? :delete, dashboard_message
                   = link_to '', super_dashboard_message_path(dashboard_message), class: 'fa fa-times', method: :delete, data: { confirm: 'Are you sure?' }
     .box-footer.clearfix

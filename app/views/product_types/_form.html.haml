@@ -1,14 +1,44 @@
 .col-lg-12
-
   = simple_form_for  @product_type do |f|
     .row.card-box
-      .col-12
-        .col-6
-          .form-group.row
-            %label{for: 'name', class: 'col-4 col-form-label'}
-              Tên loại
-            .col-8
-              = f.input :name, label: false, input_html: { class: 'form-control' }
+      .col-6
+        .form-group.row
+          %label{for: 'name', class: 'col-4 col-form-label'}
+            Tên loại
+          .col-8
+            = f.input :name, label: false, input_html: { class: 'form-control' }
+        .form-group.row
+          %label{for: 'product_category_id', class: 'col-4 col-form-label'}
+            Danh mục
+          .col-8
+            = f.input :product_category_id, collection: ProductCategory.all.map{ |p| [p.name, p.id]}, include_blank: true, label: false, input_html: { class: 'form-control' }
+        .form-group.row
+          %label{for: 'title', class: 'col-4 col-form-label'}
+            Chú thích
+          .col-8
+            = f.input :title, label: false, input_html: { class: 'form-control' }
+        .form-group.row
+          %label{for: 'position', class: 'col-4 col-form-label'}
+            Vị trí
+          .col-3
+            = f.input :position, label: false, input_html: { class: 'form-control' }
+      .col-6
+        .form-group.row
+          %label{for: 'position', class: 'col-4 col-form-label'}
+            Avatar
+          .col-4
+            = f.input :avatar, as: :file, label: false, input_html: { class: 'form-control', onchange: "readURL(this, '#avatar')" }
+            = hidden_field_tag :avatar_del
+            - if @product_type.avatar.exists?
+              #avatar
+                .container
+                  = image_tag @product_type.s3_path(:medium), class: 'image'
+                  .middle
+                    .text{ onclick: "remove_file(this, '#avatar_del')"}
+                      Xoá
+            - else
+              #avatar
+
     .row.card-box
       .col-6
         .col-12
@@ -167,7 +197,7 @@
           .form-group.row
             %label{for: 'bluetooth', class: 'col-4 col-form-label'}
               Bluetooth
-            .col-8
+            .col-820180510161649_add_title_to_product_type
               = f.input :bluetooth, label: false, input_html: { class: 'form-control' }
           .form-group.row
             %label{for: 'gprs', class: 'col-4 col-form-label'}
@@ -224,15 +254,88 @@
             .col-8
               = f.input :recoder, label: false, input_html: { class: 'form-control' }
     .form-group.row.card-box
+      %label{for: 'images', class: 'col-2 col-form-label'}
+        Hình ảnh
+      .col-10
+        .m_editor-photo-wrapper
+          .dropzone.dropzone-previews.needsclick{:id => "upload_zone"}
+            .dz-default.dz-message.needsclick
+              %span Dropzone
+              %br/
+              %h5 Kéo thả để upload
+          %div{:style => "clear: both"}
+    .form-group.row.card-box
       .col-12
         %h4 Mô tả
       .col-12
-        = f.input :description, label: false, input_html: { class: 'form-control', id: 'froalaEditor' }
+        = f.input :description, label: false, input_html: { class: 'form-control froalaEditor' }
     .form-group.row.card-box
       .col-12
         = f.submit :save, class: 'btn btn-primary pull-right'
+        
 :javascript
-  $('#froalaEditor').froalaEditor({
-    imageUploadMethod: 'POST',
-    imageUploadURL: '/upload_photos/upload_editor',
+  Dropzone.autoDiscover = false;
+  var headlineDropzone = new Dropzone("#upload_zone", {
+    url: "/upload_photos/#{@product_type.id}/add_photo",
+    paramName: "upload_file[file]",
+    params: {file_type: 'ProductType'},
+    acceptedFiles: '.jpg, .png, .jpeg, .gif', // type of files
+    addRemoveLinks: true,
+    parallelUploads: 10,
+    maxFilesize: 10,
+    headers: {'X-CSRFToken': $('meta[name="csrf-token"]').attr('content')},
+    init: function () {
+      var dropzone = this
+      $.ajax({
+        type: "GET",
+        url: '/upload_photos/#{@product_type.id}/get_photos',
+        contentType: "application/json",
+        success: function (data) {
+          var mockupFiles = data
+          mockupFiles.photos.forEach(function (file) {
+            var mockFile = {
+              name: file.photo_file_name,
+              size: file.photo_file_size,
+              type: file.photo_content_type
+            };
+            headlineDropzone.options.addedfile.call(headlineDropzone, mockFile);
+            headlineDropzone.options.thumbnail.call(headlineDropzone, mockFile, file.image_url);
+            mockFile.previewElement.classList.add('dz-success');
+            mockFile.previewElement.classList.add('dz-complete');
+            $(mockFile.previewElement).find(".dz-remove").attr('id', file.id);
+          })
+        }
+      });
+    },
+    sending: function(){
+      $('#spinner').show();
+    },
+    queuecomplete: function(){
+      $('#spinner').hide();
+    },
+    success: function (file, response) {
+      $(file.previewElement).find(".dz-remove").attr('id', response.uploadId)
+      $(file.previewElement).addClass('dz-success')
+    },
+    removedfile: function (file) {
+      if (file.status != 'error'){
+        $('#spinner').show();
+        var dropzone = this
+        var id = $(file.previewTemplate).find('.dz-remove').attr('id');
+        $.ajax({
+          type: "DELETE",
+          url: '/upload_photos/' + id,
+          contentType: "application/json",
+          success: function (data) {
+            $('#image_' + id).parent().remove();
+            $('#spinner').hide();
+          }
+        });
+      }
+      var previewElement;
+      return (previewElement = file.previewElement) != null
+        ? (previewElement.parentNode.removeChild(file.previewElement))
+        : (void 0);
+    }
   });
+

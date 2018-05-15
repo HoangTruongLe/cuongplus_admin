@@ -2,23 +2,26 @@
   %thead
     %tr
       %th.text-center{style: 'width: 10%;'}
-        = sort_link(@q, :id, {} , {remote: true})
-      %th{style: 'width: 20%;'}
-        = sort_link(@q, :name, {}, {remote: true})
-      %th{style: 'width: 20%;'}
-        = sort_link(@q, :price, {}, {remote: true})
-      %th{style: 'width: 20%;'}
-        Loại sản phẩm
-      %th.text-center{style: 'width: 10%;'} Sửa
-      %th.text-center{style: 'width: 10%;'} Xoá
-      %th.text-center{style: 'width: 10%;'} Copy
+        = sort_link(@q, :id, "ID",{}, {remote: true})
+      %th.text-center{style: 'width: 20%;'}
+        = sort_link(@q, :name, "Tên sản phẩm", {}, {remote: true})
+      %th.text-center{style: 'width: 10%;'}
+        = sort_link(@q, :price,"Giá", {}, {remote: true})
+      %th.text-center{style: 'width: 15%;'}
+        = sort_link(@q, :product_type_id, "Loại", {}, {remote: true})
+      %th.text-center{style: 'width: 10%;'}
+        = sort_link(@q, :position, "Vị trí", {}, {remote: true})
+      %th.text-center{style: 'width: 7%;'} Sửa
+      %th.text-center{style: 'width: 7%;'} Xoá
+      %th.text-center{style: 'width: 7%;'} Copy
   %tbody
     - @products.each do |product|
       %tr
         %td.text-center= product.id
         %td= product.name
-        %td= format_currency(product.price)
-        %td= product.product_type.name
+        %td.text-right= format_currency(product.price)
+        %td.text-center= product.product_type.try(:name)
+        %td.text-center= product.position
         %td.text-center= link_to '', edit_product_path(product), class: 'fa fa-edit'
         %td.text-center
           - if can? :delete, product

@@ -1,0 +1,8 @@
+%section.content
+  .box
+    .box-header.with-border
+      %h3.box-title Loại sản phẩm
+    .box-body
+      = labeled_data_paragraph 'Tên', @product_category.name
+      = link_to 'Back', product_categories_path, class: 'btn btn-primary'
+      = link_to 'Edit', edit_product_category_path(@product_category), class: 'btn btn-primary'

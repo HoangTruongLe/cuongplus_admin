@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180410113241) do
+ActiveRecord::Schema.define(version: 20180515030613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,11 @@ ActiveRecord::Schema.define(version: 20180410113241) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.integer "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.boolean "activity", default: true
   end
 
   create_table "extra_questions", force: :cascade do |t|
@@ -52,6 +57,14 @@ ActiveRecord::Schema.define(version: 20180410113241) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_incomes_on_user_id"
+  end
+
+  create_table "product_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "position"
+    t.boolean "activity", default: true
   end
 
   create_table "product_types", force: :cascade do |t|
@@ -94,6 +107,14 @@ ActiveRecord::Schema.define(version: 20180410113241) do
     t.string "fm_radio"
     t.string "recoder"
     t.text "description"
+    t.boolean "draft", default: true
+    t.integer "product_category_id", default: 21
+    t.integer "position"
+    t.string "title"
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.integer "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   create_table "products", force: :cascade do |t|
@@ -106,6 +127,7 @@ ActiveRecord::Schema.define(version: 20180410113241) do
     t.integer "status"
     t.integer "instalment"
     t.text "description"
+    t.integer "position"
     t.index ["product_type_id"], name: "index_products_on_product_type_id"
   end
 

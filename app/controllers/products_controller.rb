@@ -17,6 +17,7 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+    @product.draft = true
     @product.save(validate: false)
     redirect_to edit_product_path(@product)
   end
@@ -54,19 +55,19 @@ class ProductsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
-      @product = Product.find(params[:id])
+      @product = Product.unscoped.find(params[:id])
     end
 
     def set_query
-      @q = Product.is_not_draft.ransack(params[:q])
-      @products =  @q.result().page(params[:page]).per(20)
+      @q = Product.ransack(params[:q])
+      @products =  @q.result().order(updated_at: :desc).page(params[:page]).per(20)
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
       params[:product] = params[:product].reject{|_, v| v.empty?}
       params[:product][:price] = params[:product][:price].gsub(',', '').to_i if params[:product][:price]
       params[:product][:instalment] = params[:product][:instalment].gsub(',', '').to_i if params[:product][:instalment]
-      params.require(:product).permit(:name, :price, :product_type_id, :status, :instalment, :description,
+      params.require(:product).permit(:name, :position, :price, :product_type_id, :status, :instalment, :description,
         :upload_files_attributes => [:id, :file, :_destroy]).merge(draft: false)
     end
 end

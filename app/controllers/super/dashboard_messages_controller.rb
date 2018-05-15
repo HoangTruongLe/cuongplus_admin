@@ -46,6 +46,6 @@ class Super::DashboardMessagesController < ApplicationController
     end
 
     def dashboard_message_params
-      params.require(:dashboard_message).permit(:title, :body)
+      params.require(:dashboard_message).permit(:title, :body, :avatar, :activity)
     end
 end
