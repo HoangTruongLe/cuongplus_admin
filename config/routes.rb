@@ -39,8 +39,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  get '/index', to: 'index#index'
-  get '/index/:category_id', to: 'index#index'
-  get '/product_details/:id', to: 'index#product_details', as: "product_details"
+  get '/c/:category_id', to: 'index#index', as: 'category_index'
+  get '/:id', to: 'index#product_details', as: "product_details"
   root 'index#index'
 end

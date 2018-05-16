@@ -1,5 +1,8 @@
 class ProductType < ApplicationRecord
   include ScopingConcern
+  extend FriendlyId
+  friendly_id :unaccented_name, :use => [:slugged, :finders]
+  
   belongs_to :product_category, optional: true
   has_many :products, :dependent => :destroy
   has_many :upload_files, as: :fileable, :dependent => :destroy
@@ -26,4 +29,9 @@ class ProductType < ApplicationRecord
   def s3_path(style = nil)
     avatar.s3_object(style).presigned_url("get", expires_in: 100) if avatar.exists?
   end
+  
+  def remove_accent_on_name
+    self.unaccented_name = remove_accent(name) if name
+  end
+  
 end

@@ -11,9 +11,9 @@
         = sort_link(@q, :product_type_id, "Loại", {}, {remote: true})
       %th.text-center{style: 'width: 10%;'}
         = sort_link(@q, :position, "Vị trí", {}, {remote: true})
-      %th.text-center{style: 'width: 7%;'} Sửa
-      %th.text-center{style: 'width: 7%;'} Xoá
-      %th.text-center{style: 'width: 7%;'} Copy
+      %th.text-center{style: 'width: 10%;'} 
+        = sort_link(@q, :status, "Tình trạng", {}, {remote: true})
+      %th.text-center{style: 'width: 15%;'} Chức năng
   %tbody
     - @products.each do |product|
       %tr
@@ -22,13 +22,13 @@
         %td.text-right= format_currency(product.price)
         %td.text-center= product.product_type.try(:name)
         %td.text-center= product.position
-        %td.text-center= link_to '', edit_product_path(product), class: 'fa fa-edit'
+        %td.text-center= t(product.status)
         %td.text-center
+          = link_to '', edit_product_path(product), class: 'fa fa-edit'
           - if can? :delete, product
-            = link_to '', product_path(product), class: 'fa fa-times',
+            = link_to '', product_path(product), class: 'ml-2 fa fa-times',
              method: :delete, data: { confirm: 'Bạn có chắc chắn muốn xoá không?' }, remote: true
-        %td.text-center
-          = link_to '', copy_product_path(product), class: 'fa fa-copy'
+          = link_to '', copy_product_path(product), class: 'ml-2 fa fa-copy'
 :javascript
   $(document).on("confirm:complete", function(e, answer){
     if(answer){

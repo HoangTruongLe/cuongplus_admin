@@ -1,4 +1,7 @@
 class DashboardMessage < ApplicationRecord
+  extend FriendlyId
+  friendly_id :title, :use => [:slugged, :finders]
+  
   has_attached_file :avatar, 
     styles: { medium: "300x300>", thumb: "100x100>", sz1: "390x450", small_thumb: "50x50" },
     default_url: "/images/:style/missing.png"

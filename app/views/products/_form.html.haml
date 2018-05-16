@@ -29,9 +29,8 @@
           %label{for: 'status', class: 'col-4 col-form-label'}
             Tình trạng hàng
           .col-8
-            = f.input :status, collection: Product::STATUS,
-            :label_method => :last, :value_method => :first, include_blank: true,
-            label: false, input_html: { class: 'form-control' }
+            = f.input :status, collection: Product::STATUS.map{ |status| [t(status[0]), status[0]]},
+              include_blank: true, label: false, input_html: { class: 'form-control' }
         .form-group.row
           %label{for: 'position', class: 'col-4 col-form-label'}
             Vị trí

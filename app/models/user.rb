@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   has_one :profile
   has_one :income
-
+  
   def self.filter_and_sort(params)
     users = all
     if params[:term].present?

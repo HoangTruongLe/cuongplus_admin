@@ -64,7 +64,7 @@ class ProductsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params[:product] = params[:product].reject{|_, v| v.empty?}
+      params[:product] = params[:product].reject{|k, v| v.empty?}
       params[:product][:price] = params[:product][:price].gsub(',', '').to_i if params[:product][:price]
       params[:product][:instalment] = params[:product][:instalment].gsub(',', '').to_i if params[:product][:instalment]
       params.require(:product).permit(:name, :position, :price, :product_type_id, :status, :instalment, :description,

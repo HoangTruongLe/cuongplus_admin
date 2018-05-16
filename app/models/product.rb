@@ -1,5 +1,11 @@
 class Product < ApplicationRecord
   include ScopingConcern
+  include Utility
+  extend FriendlyId
+  friendly_id :unaccented_name, :use => [:slugged, :finders]
+  
+  before_save :remove_accent_on_name
+  
   belongs_to :product_type, optional: true
   has_many :upload_files, as: :fileable, :dependent => :destroy
   accepts_nested_attributes_for :upload_files, reject_if: :all_blank, allow_destroy: true
@@ -12,8 +18,8 @@ class Product < ApplicationRecord
   scope :order_by_position, -> { order(position: :asc) }
   scope :instalment, -> { where('instalment > 0') }
   
-  enum status: [:available, :unavailable, :waiting]
-  STATUS = [[:available, 'Available'] ,[:unavailable, 'Unavailable'], [:waiting, 'Waiting']]
+  enum status: [:available, :unavailable, :waiting, :sold]
+  STATUS = [[:available, 'Available'] ,[:unavailable, 'Unavailable'], [:waiting, 'Waiting'], [:sold, 'Sold']]
   SEARCHING_COLUMNS = [:name, :price, :description]
 
   ransacker :price do
@@ -32,5 +38,9 @@ class Product < ApplicationRecord
   
   def to_param_like
     remove_accent(name).parameterize
+  end
+  
+  def remove_accent_on_name
+    self.unaccented_name = remove_accent(name) if name
   end
 end
