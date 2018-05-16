@@ -14,6 +14,6 @@ class IndexController < ApplicationController
     end
     
     def set_category
-      @category = ProductCategory.find(params[:category_id]) || ProductCategory.first
+      @category = params[:category_id]? ProductCategory.all.find(params[:category_id]) : ProductCategory.first
     end
 end

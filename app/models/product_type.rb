@@ -1,7 +1,10 @@
 class ProductType < ApplicationRecord
   include ScopingConcern
+  include Utility
   extend FriendlyId
   friendly_id :unaccented_name, :use => [:slugged, :finders]
+  
+  before_save :remove_accent_on_name
   
   belongs_to :product_category, optional: true
   has_many :products, :dependent => :destroy

@@ -1,10 +1,10 @@
 class ProductCategory < ApplicationRecord
   include Utility
-  
   extend FriendlyId
   friendly_id :unaccented_name, :use => [:slugged, :finders]
   
   before_save :remove_accent_on_name
+  
   
   has_many :product_types, :dependent => :destroy
   

@@ -42,7 +42,7 @@ class Super::DashboardMessagesController < ApplicationController
 
   private
     def set_dashboard_message
-      @dashboard_message = DashboardMessage.find(params[:id])
+      @dashboard_message = DashboardMessage.all.find(params[:id])
     end
 
     def dashboard_message_params

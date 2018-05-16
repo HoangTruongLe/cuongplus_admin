@@ -54,7 +54,7 @@ class ProductCategoriesController < ApplicationController
 
   private
     def set_product_category
-      @product_category = ProductCategory.find(params[:id])
+      @product_category = ProductCategory.all.find(params[:id])
     end
 
     def set_query
