@@ -70,3 +70,4 @@
 //= require common
 //= require toastr
 //= require lazyload.min
+//= require best_in_place

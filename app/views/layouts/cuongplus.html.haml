@@ -31,11 +31,18 @@
           %i.fa.fa-bars
         #navbarResponsive.collapse.navbar-collapse
           %ul.navbar-nav.text-uppercase.ml-auto
+            %li.nav-item
+              %input{type: 'text', placeholder: 'Tìm kiếm...', class: 'searchbox form-control'}
             - ProductCategory.all.active.order_by_position.each do |category|
               %li.nav-item
                 = link_to category.name, category_index_path(category), class: 'nav-link js-scroll-trigger'
             %li.nav-item
               %a.nav-link.js-scroll-trigger{:href => "#contact"} Liên Hệ
+            - if current_user
+              %li.nav-item
+                %a.nav-link.js-scroll-trigger{:href => "/users/sign_out"} Logout
+              %li.nav-item
+                %a.nav-link.js-scroll-trigger{:href => "/super/dashboard_messages"} Admin
     / Header
     %header.masthead.chevron{style: "margin-top: -100px"}
       .container

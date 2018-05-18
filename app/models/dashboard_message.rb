@@ -1,6 +1,9 @@
 class DashboardMessage < ApplicationRecord
+  include Utility
   extend FriendlyId
-  friendly_id :title, :use => [:slugged, :finders]
+  friendly_id :unaccented_title, :use => [:slugged, :finders]
+  
+  before_save :remove_accent_on_title
   
   has_attached_file :avatar, 
     styles: { medium: "300x300>", thumb: "100x100>", sz1: "390x450", small_thumb: "50x50" },
@@ -21,5 +24,9 @@ class DashboardMessage < ApplicationRecord
   
   def s3_path(style = nil)
     avatar.s3_object(style).presigned_url("get", expires_in: 100) if avatar.exists?
+  end
+  
+  def remove_accent_on_title
+    self.unaccented_title = remove_accent(title) if title
   end
 end

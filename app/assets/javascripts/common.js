@@ -16,6 +16,7 @@ $(document).ready(function(){
     elements_selector: "img"
   });
   $('#product_images').slick({dots: true});
+  $(".best_in_place").best_in_place();
 })
 
 function readURL(input, render_element) {

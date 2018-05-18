@@ -50,7 +50,7 @@
         %br
         %hr
         .row
-          .col-12
+          .col-12.product-description
             = raw(@product.try(:description))
   .col-lg-4
     .col-12
@@ -271,7 +271,7 @@
         .col-md-12.portfolio-item.text-center
           %a.portfolio-link{:href => "#{product_details_path(p)}"}
             - if p.upload_files.size > 0
-              .product_images_wrapper
+              .product_images_wrapper.eyecatch
                 - if p.status == 'available'
                   .corner-ribbon.top-right.sticky.blue
                     = t(p.status)

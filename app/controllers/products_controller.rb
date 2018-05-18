@@ -30,9 +30,9 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1.json
   def update
     respond_to do |format|
-      if @product.update(product_params)
+      if @product.update!(product_params)
         format.html { redirect_to products_url, notice: 'Product was successfully updated.' }
-        format.json { redirect_to products_url, status: :ok, location: @product }
+        format.json { render json: @product }
       else
         format.html { render :edit }
         format.json { render json: @product.errors, status: :unprocessable_entity }

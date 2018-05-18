@@ -31,7 +31,7 @@ class ProductTypesController < ApplicationController
     respond_to do |format|
       if @product_type.save
         format.html { redirect_to product_types_url, notice: 'Product type was successfully created.' }
-        format.json { render :index, status: :created, location: @product_type }
+        format.json { render json: @product_type }
       else
         format.html { render :new }
         format.json { render json: @product_type.errors, status: :unprocessable_entity }
@@ -47,7 +47,7 @@ class ProductTypesController < ApplicationController
       @product_type.avatar = nil if params[:avatar_del] == 'true'
       if @product_type.save!
         format.html { redirect_to product_types_url, notice: 'Product type was successfully updated.' }
-        format.json { render :index, status: :ok, location: @product_type }
+        format.json { render json: @product_type }
       else
         format.html { render :edit }
         format.json { render json: @product_type.errors, status: :unprocessable_entity }
