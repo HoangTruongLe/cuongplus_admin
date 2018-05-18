@@ -626,6 +626,9 @@ GEM
     bcrypt (3.1.11-java)
     bcrypt (3.1.11-x64-mingw32)
     bcrypt (3.1.11-x86-mingw32)
+    best_in_place (3.1.1)
+      actionpack (>= 3.2)
+      railties (>= 3.2)
     bindex (0.5.0)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
@@ -970,6 +973,7 @@ DEPENDENCIES
   awesome_print
   aws-sdk
   aws-sdk-s3
+  best_in_place
   bootstrap-sass (~> 3.3, >= 3.3.7)
   byebug
   cancancan (~> 2.0)
