@@ -32,7 +32,8 @@
         #navbarResponsive.collapse.navbar-collapse
           %ul.navbar-nav.text-uppercase.ml-auto
             %li.nav-item
-              %input{type: 'text', placeholder: 'Tìm kiếm...', class: 'searchbox form-control'}
+              = search_form_for @q, remote: true, method: :get, url: root_path do |f|
+                = f.search_field :name_or_price_cont_any, {placeholder: 'Tìm ...', class: 'form-control searchbox', onkeydown: "if (event.keyCode == 13) { this.form.submit(); return false; }"}
             - ProductCategory.all.active.order_by_position.each do |category|
               %li.nav-item
                 = link_to category.name, category_index_path(category), class: 'nav-link js-scroll-trigger'

@@ -3,6 +3,8 @@ class IndexController < ApplicationController
   before_action :set_category, only: [:index]
 
   def index
+    @q = Product.is_not_draft.ransack(params[:q])
+    @products = @q.result().includes(:product_type).page(params[:page]).per(15)
   end
   
   def product_details
