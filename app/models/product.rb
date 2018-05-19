@@ -20,7 +20,7 @@ class Product < ApplicationRecord
   
   enum status: [:available, :unavailable, :waiting, :sold]
   STATUS = [[:available, 'Available'] ,[:unavailable, 'Unavailable'], [:waiting, 'Waiting'], [:sold, 'Sold']]
-  SEARCHING_COLUMNS = [:name, :price, :description]
+  SEARCHING_COLUMNS = [:name, :description]
 
   ransacker :price do
     Arel.sql("to_char(\"#{table_name}\".\"price\", '99999999')")
@@ -32,7 +32,7 @@ class Product < ApplicationRecord
   
   def self.search word
     word = "%#{word}%"
-    query = SEARCHING_COLUMNS.collect{|col| "lower_unaccent(#{col}) ILIKE lower_unaccent(?)" }.join(" OR ")
+    query = SEARCHING_COLUMNS.collect{|col| " lower_unaccent(#{col}) ILIKE lower_unaccent(?)" }.join(" OR ")
     where([query, [word] * SEARCHING_COLUMNS.size].flatten).search_order
   end
   
