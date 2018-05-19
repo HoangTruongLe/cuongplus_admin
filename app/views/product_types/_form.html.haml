@@ -1,238 +1,341 @@
 .col-lg-12
-
   = simple_form_for  @product_type do |f|
     .row.card-box
-      .col-12
-        .col-6
-          .form-group.row
-            %label{for: 'name', class: 'col-4 col-form-label'}
-              Type Name
-            .col-8
-              = f.input :name, label: false, input_html: { class: 'form-control' }
+      .col-lg-6
+        .form-group.row
+          %label{for: 'name', class: 'col-lg-4 col-form-label'}
+            Tên loại
+          .col-lg-8
+            = f.input :name, label: false, input_html: { class: 'form-control' }
+        .form-group.row
+          %label{for: 'product_category_id', class: 'col-lg-4 col-form-label'}
+            Danh mục
+          .col-lg-8
+            = f.input :product_category_id, collection: ProductCategory.all.map{ |p| [p.name, p.id]}, include_blank: true, label: false, input_html: { class: 'form-control' }
+        .form-group.row
+          %label{for: 'title', class: 'col-lg-4 col-form-label'}
+            Chú thích
+          .col-lg-8
+            = f.input :title, label: false, input_html: { class: 'form-control' }
+        .form-group.row
+          %label{for: 'position', class: 'col-lg-4 col-form-label'}
+            Vị trí
+          .col-lg-3
+            = f.input :position, label: false, input_html: { class: 'form-control' }
+      .col-lg-6
+        .form-group.row
+          %label{for: 'avatar', class: 'col-lg-4 col-form-label'}
+            Avatar
+          .col-lg-4
+            = f.input :avatar, as: :file, label: false, input_html: { class: 'form-control', onchange: "readURL(this, '#avatar')" }
+            = hidden_field_tag :avatar_del
+            - if @product_type.avatar.exists?
+              #avatar
+                .container
+                  = image_tag @product_type.s3_path(:medium), class: 'image'
+                  .middle
+                    .text{ onclick: "remove_file(this, '#avatar_del')"}
+                      Xoá
+            - else
+              #avatar
+
     .row.card-box
-      .col-6
-        .col-12
-          %h4 General Information
-        .col-12
+      .col-lg-6
+        .col-lg-12
+          %h4 Thông tin chung
+        .col-lg-12
           .form-group.row
-            %label{for: 'provider', class: 'col-4 col-form-label'}
-              Provider
-            .col-8
+            %label{for: 'provider', class: 'col-lg-4 col-form-label'}
+              Nhà cung cấp
+            .col-lg-8
               = f.input :provider, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'os', class: 'col-4 col-form-label'}
-              OS
-            .col-8
+            %label{for: 'os', class: 'col-lg-4 col-form-label'}
+              Hệ điều hành
+            .col-lg-8
               = f.input :os, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'language', class: 'col-4 col-form-label'}
-              Language
-            .col-8
+            %label{for: 'language', class: 'col-lg-4 col-form-label'}
+              Ngôn ngữ
+            .col-lg-8
               = f.input :language, label: false, input_html: { class: 'form-control' }
-      .col-6
-        .col-12
-          %h4 Screen Information
-        .col-12
+      .col-lg-6
+        .col-lg-12
+          %h4 Thông số màn hình
+        .col-lg-12
           .form-group.row
-            %label{for: 'screen_type', class: 'col-4 col-form-label'}
-              Screen Type
-            .col-8
+            %label{for: 'screen_type', class: 'col-lg-4 col-form-label'}
+              loại màn hình
+            .col-lg-8
               = f.input :screen_type, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'color', class: 'col-4 col-form-label'}
-              Color
-            .col-8
+            %label{for: 'color', class: 'col-lg-4 col-form-label'}
+              Màu sắc
+            .col-lg-8
               = f.input :color, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'resolution', class: 'col-4 col-form-label'}
-              Resolution
-            .col-8
+            %label{for: 'resolution', class: 'col-lg-4 col-form-label'}
+              Độ phân giải
+            .col-lg-8
               = f.input :resolution, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'screen_size', class: 'col-4 col-form-label'}
-              Screen Size
-            .col-8
+            %label{for: 'screen_size', class: 'col-lg-4 col-form-label'}
+              Kích thước màn hình
+            .col-lg-8
               = f.input :screen_size, label: false, input_html: { class: 'form-control' }
     .row.card-box
-      .col-6
-        .col-12
-          %h4 Camera Information
-        .col-12
+      .col-lg-6
+        .col-lg-12
+          %h4 Thông tin camera
+        .col-lg-12
           .form-group.row
-            %label{for: 'font_camera', class: 'col-4 col-form-label'}
-              Front Camera
-            .col-8
+            %label{for: 'font_camera', class: 'col-lg-4 col-form-label'}
+              Camera trước
+            .col-lg-8
               = f.input :font_camera, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'back_camera', class: 'col-4 col-form-label'}
-              Back Camera
-            .col-8
+            %label{for: 'back_camera', class: 'col-lg-4 col-form-label'}
+              Camera sau
+            .col-lg-8
               = f.input :back_camera, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'flash', class: 'col-4 col-form-label'}
+            %label{for: 'flash', class: 'col-lg-4 col-form-label'}
               Flash
-            .col-8
+            .col-lg-8
               = f.input :flash, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'video_mode', class: 'col-4 col-form-label'}
-              Video Mode
-            .col-8
+            %label{for: 'video_mode', class: 'col-lg-4 col-form-label'}
+              Quay phim
+            .col-lg-8
               = f.input :video_mode, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'video_call', class: 'col-4 col-form-label'}
+            %label{for: 'video_call', class: 'col-lg-4 col-form-label'}
               Video Call
-            .col-8
+            .col-lg-8
               = f.input :video_call, label: false, input_html: { class: 'form-control' }
-      .col-6
-        .col-12
-          %h4 CPU Information
-        .col-12
+      .col-lg-6
+        .col-lg-12
+          %h4 Thông tin CPU
+        .col-lg-12
           .form-group.row
-            %label{for: 'cpu', class: 'col-4 col-form-label'}
+            %label{for: 'cpu', class: 'col-lg-4 col-form-label'}
               CPU
-            .col-8
+            .col-lg-8
               = f.input :cpu, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'ram', class: 'col-4 col-form-label'}
+            %label{for: 'ram', class: 'col-lg-4 col-form-label'}
               Ram
-            .col-8
+            .col-lg-8
               = f.input :ram, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'chipset', class: 'col-4 col-form-label'}
+            %label{for: 'chipset', class: 'col-lg-4 col-form-label'}
               Chipset
-            .col-8
+            .col-lg-8
               = f.input :chipset, label: false, input_html: { class: 'form-control' }
     .row.card-box
-      .col-6
-        .col-12
-          %h4 Memory Information
-        .col-12
+      .col-lg-6
+        .col-lg-12
+          %h4 Thông tin bộ nhớ
+        .col-lg-12
           .form-group.row
-            %label{for: 'address_memory', class: 'col-4 col-form-label'}
-              Address Memory
-            .col-8
+            %label{for: 'address_memory', class: 'col-lg-4 col-form-label'}
+              Bộ nhớ danh bạ
+            .col-lg-8
               = f.input :address_memory, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'maximum_memory', class: 'col-4 col-form-label'}
-              Maximum Memory
-            .col-8
+            %label{for: 'maximum_memory', class: 'col-lg-4 col-form-label'}
+              Hổ trợ thẻ nhớ tối đa
+            .col-lg-8
               = f.input :maximum_memory, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'built_in_memory', class: 'col-4 col-form-label'}
-              Built In Memory
-            .col-8
+            %label{for: 'built_in_memory', class: 'col-lg-4 col-form-label'}
+              Bộ nhớ trong
+            .col-lg-8
               = f.input :built_in_memory, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'extra_memory', class: 'col-4 col-form-label'}
-              Extra Memory
-            .col-8
+            %label{for: 'extra_memory', class: 'col-lg-4 col-form-label'}
+              Bộ nhớ ngoài
+            .col-lg-8
               = f.input :extra_memory, label: false, input_html: { class: 'form-control' }
-      .col-6
-        .col-12
-          %h4 Weightiness Information
-        .col-12
+      .col-lg-6
+        .col-lg-12
+          %h4 Trọng lượng máy
+        .col-lg-12
           .form-group.row
-            %label{for: 'weight', class: 'col-4 col-form-label'}
-              Weight
-            .col-8
+            %label{for: 'weight', class: 'col-lg-4 col-form-label'}
+              Trọng lượng
+            .col-lg-8
               = f.input :weight, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'size', class: 'col-4 col-form-label'}
-              Size
-            .col-8
+            %label{for: 'size', class: 'col-lg-4 col-form-label'}
+              kích thước
+            .col-lg-8
               = f.input :size, label: false, input_html: { class: 'form-control' }
-        .col-12
-          %h4 Battery Information
-        .col-12
+        .col-lg-12
+          %h4 Thông tin Pin
+        .col-lg-12
           .form-group.row
-            %label{for: 'battery_capacity', class: 'col-4 col-form-label'}
-              Battery Capacity
-            .col-8
+            %label{for: 'battery_capacity', class: 'col-lg-4 col-form-label'}
+              Dung lượng pin
+            .col-lg-8
               = f.input :battery_capacity, label: false, input_html: { class: 'form-control' }
     .row.card-box
-      .col-6
-        .col-12
-          %h4 Connection Information
-        .col-12
+      .col-lg-6
+        .col-lg-12
+          %h4 Thông tin kết nối
+        .col-lg-12
           .form-group.row
-            %label{for: 'c3g', class: 'col-4 col-form-label'}
-              3G Connection
-            .col-8
+            %label{for: 'c3g', class: 'col-lg-4 col-form-label'}
+              Kết nối 3G
+            .col-lg-8
               = f.input :c3g, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'c4g', class: 'col-4 col-form-label'}
-              4G Connection
-            .col-8
+            %label{for: 'c4g', class: 'col-lg-4 col-form-label'}
+              Kết nối 4G
+            .col-lg-8
               = f.input :c4g, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'bluetooth', class: 'col-4 col-form-label'}
+            %label{for: 'bluetooth', class: 'col-lg-4 col-form-label'}
               Bluetooth
-            .col-8
+            .col-lg-820180510161649_add_title_to_product_type
               = f.input :bluetooth, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'gprs', class: 'col-4 col-form-label'}
+            %label{for: 'gprs', class: 'col-lg-4 col-form-label'}
               GPRS
-            .col-8
+            .col-lg-8
               = f.input :gprs, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'gps', class: 'col-4 col-form-label'}
+            %label{for: 'gps', class: 'col-lg-4 col-form-label'}
               GPS
-            .col-8
+            .col-lg-8
               = f.input :gps, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'usb', class: 'col-4 col-form-label'}
+            %label{for: 'usb', class: 'col-lg-4 col-form-label'}
               USB
-            .col-8
+            .col-lg-8
               = f.input :usb, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'sim_card_port', class: 'col-4 col-form-label'}
-              Sim Card Port
-            .col-8
+            %label{for: 'sim_card_port', class: 'col-lg-4 col-form-label'}
+              Số khe cắm sim
+            .col-lg-8
               = f.input :sim_card_port, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'sim_card', class: 'col-4 col-form-label'}
-              Sim card
-            .col-8
+            %label{for: 'sim_card', class: 'col-lg-4 col-form-label'}
+              Loại sim
+            .col-lg-8
               = f.input :sim_card, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'wifi', class: 'col-4 col-form-label'}
+            %label{for: 'wifi', class: 'col-lg-4 col-form-label'}
               Wifi
-            .col-8
+            .col-lg-8
               = f.input :wifi, label: false, input_html: { class: 'form-control' }
-      .col-6
-        .col-12
-          %h4 Utility Information
-        .col-12
+      .col-lg-6
+        .col-lg-12
+          %h4 Đa phương tiện
+        .col-lg-12
           .form-group.row
-            %label{for: 'video_player', class: 'col-4 col-form-label'}
-              Video Player
-            .col-8
+            %label{for: 'video_player', class: 'col-lg-4 col-form-label'}
+              Chơi Video
+            .col-lg-8
               = f.input :video_player, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'mp3_player', class: 'col-4 col-form-label'}
-              MP3 Player
-            .col-8
+            %label{for: 'mp3_player', class: 'col-lg-4 col-form-label'}
+              Chơi nhạc
+            .col-lg-8
               = f.input :mp3_player, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'fm_radio', class: 'col-4 col-form-label'}
-              FM Radio
-            .col-8
+            %label{for: 'fm_radio', class: 'col-lg-4 col-form-label'}
+              Đài FM
+            .col-lg-8
               = f.input :fm_radio, label: false, input_html: { class: 'form-control' }
           .form-group.row
-            %label{for: 'recoder', class: 'col-4 col-form-label'}
-              Recoder
-            .col-8
+            %label{for: 'recoder', class: 'col-lg-4 col-form-label'}
+              Ghi âm
+            .col-lg-8
               = f.input :recoder, label: false, input_html: { class: 'form-control' }
     .form-group.row.card-box
-      .col-12
-        %h4 Description
-      .col-12
-        = f.input :description, label: false, input_html: { class: 'form-control', id: 'froalaEditor' }
+      %label{for: 'images', class: 'col-lg-2 col-form-label'}
+        Hình ảnh
+      .col-lg-10
+        .m_editor-photo-wrapper
+          .dropzone.dropzone-previews.needsclick{:id => "upload_zone"}
+            .dz-default.dz-message.needsclick
+              %span Dropzone
+              %br/
+              %h5 Kéo thả để upload
+          %div{:style => "clear: both"}
     .form-group.row.card-box
-      .col-12
+      .col-lg-12
+        %h4 Mô tả
+      .col-lg-12
+        = f.input :description, label: false, input_html: { class: 'form-control froalaEditor' }
+    .form-group.row.card-box
+      .col-lg-12
         = f.submit :save, class: 'btn btn-primary pull-right'
+        
 :javascript
-  $('#froalaEditor').froalaEditor({
-    imageUploadMethod: 'POST',
-    imageUploadURL: '/upload_photos/upload_editor',
+  Dropzone.autoDiscover = false;
+  var headlineDropzone = new Dropzone("#upload_zone", {
+    url: "/upload_photos/#{@product_type.id}/add_photo",
+    paramName: "upload_file[file]",
+    params: {file_type: 'ProductType'},
+    acceptedFiles: '.jpg, .png, .jpeg, .gif', // type of files
+    addRemoveLinks: true,
+    parallelUploads: 10,
+    maxFilesize: 10,
+    headers: {'X-CSRFToken': $('meta[name="csrf-token"]').attr('content')},
+    init: function () {
+      var dropzone = this
+      $.ajax({
+        type: "GET",
+        url: '/upload_photos/#{@product_type.id}/get_photos',
+        contentType: "application/json",
+        success: function (data) {
+          var mockupFiles = data
+          mockupFiles.photos.forEach(function (file) {
+            var mockFile = {
+              name: file.photo_file_name,
+              size: file.photo_file_size,
+              type: file.photo_content_type
+            };
+            headlineDropzone.options.addedfile.call(headlineDropzone, mockFile);
+            headlineDropzone.options.thumbnail.call(headlineDropzone, mockFile, file.image_url);
+            mockFile.previewElement.classList.add('dz-success');
+            mockFile.previewElement.classList.add('dz-complete');
+            $(mockFile.previewElement).find(".dz-remove").attr('id', file.id);
+          })
+        }
+      });
+    },
+    sending: function(){
+      $('#spinner').show();
+    },
+    queuecomplete: function(){
+      $('#spinner').hide();
+    },
+    success: function (file, response) {
+      $(file.previewElement).find(".dz-remove").attr('id', response.uploadId)
+      $(file.previewElement).addClass('dz-success')
+    },
+    removedfile: function (file) {
+      if (file.status != 'error'){
+        $('#spinner').show();
+        var dropzone = this
+        var id = $(file.previewTemplate).find('.dz-remove').attr('id');
+        $.ajax({
+          type: "DELETE",
+          url: '/upload_photos/' + id,
+          contentType: "application/json",
+          success: function (data) {
+            $('#image_' + id).parent().remove();
+            $('#spinner').hide();
+          }
+        });
+      }
+      var previewElement;
+      return (previewElement = file.previewElement) != null
+        ? (previewElement.parentNode.removeChild(file.previewElement))
+        : (void 0);
+    }
   });
+

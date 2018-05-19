@@ -1,15 +1,44 @@
 .col-lg-12
   = simple_form_for [:super, @dashboard_message] do |f|
-    .form-group.row
-      %label{for: 'Title', class: 'col-1 col-form-label'}
-        Title
-      .col-8
-        = f.input :title, label: false, input_html: { class: 'form-control' }
-    .form-group.row
-      %label{for: 'Body', class: 'col-1 col-form-label'}
-        Body
-      .col-8
-        = f.input :body, label: false, input_html: { class: 'form-control', :rows => 10 }
-    .form-group.row
-      .col-9
+    .row.card-box
+      .col-lg-12
+        .form-group.row
+          %label{for: 'Title', class: 'col-lg-1 col-form-label'}
+            Tiêu đề
+          .col-lg-8
+            = f.input :title, label: false, input_html: { class: 'form-control' }
+      .col-lg-12
+        .form-group.row
+          = f.label "Trạng thái", class: "col-lg-1 col-form-label"
+          .col-lg-10.row
+            .radio.radio-primary.radio-inline.collection_radio_buttons_lable
+              = f.radio_button :activity, true
+              = f.label :activity_true, 'Hoạt động'
+            .radio.radio-primary.radio-inline.collection_radio_buttons_lable
+              = f.radio_button :activity, false
+              = f.label :activity_false, 'Không hoạt động'
+    .row.card-box
+      .col-lg-12
+        .form-group.row
+          %label{for: 'position', class: 'col-lg-1 col-form-label'}
+            Avatar
+          .col-lg-4
+            = f.input :avatar, as: :file, label: false, input_html: { class: 'form-control', onchange: "readURL(this, '#avatar')" }
+            = hidden_field_tag :avatar_del
+            - if @dashboard_message.avatar.exists?
+              #avatar
+                .container
+                  = image_tag @dashboard_message.s3_path(:medium), class: 'image'
+                  .middle
+                    .text{ onclick: "remove_file(this, '#avatar_del')"}
+                      Xoá
+            - else
+              #avatar
+    .form-group.row.card-box
+      %label{for: 'position', class: 'col-lg-1 col-form-label'}
+        Mô tả
+      .col-lg-12
+        = f.input :body, label: false, input_html: { class: 'form-control froalaEditor' }
+    .form-group.row.card-box
+      .col-lg-12
         = f.submit :save, class: 'btn btn-primary pull-right'

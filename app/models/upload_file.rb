@@ -1,6 +1,6 @@
 class UploadFile < ApplicationRecord
   belongs_to :fileable, polymorphic: true, optional: true
-  has_attached_file :file, styles: { medium: "360x240>", thumb: "100x100>" },
+  has_attached_file :file, styles: { medium: "360x240>", thumb: "100x100>", large: "900x600", sz1: "390x450" },
   default_url: "/images/:style/missing.png"
   validates_attachment_content_type :file, :content_type => /\Aimage\/.*\Z/
   validates_attachment_size :file, :less_than => 5.megabytes

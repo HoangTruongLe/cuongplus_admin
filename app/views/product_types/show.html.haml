@@ -1,8 +1,8 @@
 %section.content
   .box
     .box-header.with-border
-      %h3.box-title Product Type
+      %h3.box-title Loại sản phẩm
     .box-body
-      = labeled_data_paragraph 'Name', @product_type.name
+      = labeled_data_paragraph 'Tên', @product_type.name
       = link_to 'Back', product_types_path, class: 'btn btn-primary'
       = link_to 'Edit', edit_product_type_path(@product_type), class: 'btn btn-primary'

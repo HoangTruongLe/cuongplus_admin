@@ -1,0 +1,62 @@
+- @category.product_types.order_by_position.each_with_index do |type, idx|
+  - products = type.products
+  - if products.count  > 0
+    .row
+      %div{class: "#{ idx.odd? ? 'chevron' : 'no-chevron' }"}
+        %a{href: type_info_path(type) , class: "product-type-name"}=type.name
+        %h4{class: "product-type-title"}=type.title
+        .container
+          .row
+            - if type.back_camera && type.font_camera
+              .col-xl-4.type-info  
+                .row
+                  .col-2
+                    %div{class: "#{ idx.odd? ? 'hexagon-white' : 'hexagon' }"}
+                      %i.ti-camera
+                  .col-10.text-left
+                    %h4 
+                      = type.try(:name) + " Camera"
+                    %span
+                      = type.back_camera + " & " + type.font_camera
+            - if type.built_in_memory && type.color
+              .col-xl-4.type-info  
+                .row
+                  .col-2
+                    %div{class: "#{ idx.odd? ? 'hexagon-white' : 'hexagon' }"}
+                      %i.ti-save
+                  .col-10.text-left
+                    %h4 Dung lượng & màu sắc
+                    %span
+                      = type.built_in_memory + ' & ' + type.color
+            - if type.screen_type && type.resolution && type.screen_size
+              .col-xl-4.type-info  
+                .row
+                  .col-2
+                    %div{class: "#{ idx.odd? ? 'hexagon-white' : 'hexagon' }"}
+                      %i.ti-desktop
+                  .col-10.text-left
+                    %h4 Màn hình
+                    %span
+                      = type.screen_type + ' - ' + type.resolution + ' - ' + type.screen_size
+          .row.product-container
+            
+            .col-xl-6.mb-2
+              %a{href: type_info_path(type)}
+                = image_tag type.s3_path(:sz1) if type.s3_path(:sz1)
+            .col-xl-6 
+              %table.table.table-bordered
+                %thead{class: "#{ idx.odd? ? 'table-chevron-head' : 'table-no-chevron-head' }"}
+                  %tr
+                    %th.text-center{style: 'width: 50%;'} Sản Phẩm
+                    %th.text-center{style: 'width: 25%;'} Giá
+                    - if products.instalment.count > 0 
+                      %th.text-center{style: 'width: 25%;'} Trả Trước
+
+                %tbody{class: "#{ idx.odd? ? 'table-chevron-body' : 'table-no-chevron-body' }"}
+                  - products.order_by_position.each do |product|
+                    %tr
+                      %td.text-left
+                        %a{:href => "#{product_details_path(product)}", class: 'product-text'}= product.name
+                      %td.text-center= format_currency(product.price)
+                      - if products.instalment.count > 0
+                        %td.text-center= format_currency(product.instalment)

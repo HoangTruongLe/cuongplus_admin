@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180406121353) do
+ActiveRecord::Schema.define(version: 20180519070640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(version: 20180406121353) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.integer "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.boolean "activity", default: true
+    t.string "slug"
+    t.string "unaccented_title"
+    t.index ["slug"], name: "index_dashboard_messages_on_slug", unique: true
   end
 
   create_table "extra_questions", force: :cascade do |t|
@@ -32,6 +40,18 @@ ActiveRecord::Schema.define(version: 20180406121353) do
     t.datetime "updated_at", null: false
     t.index ["income_id"], name: "index_extra_questions_on_income_id"
     t.index ["question_template_id"], name: "index_extra_questions_on_question_template_id"
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
   create_table "incomes", force: :cascade do |t|
@@ -52,6 +72,17 @@ ActiveRecord::Schema.define(version: 20180406121353) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_incomes_on_user_id"
+  end
+
+  create_table "product_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "position"
+    t.boolean "activity", default: true
+    t.string "unaccented_name"
+    t.string "slug"
+    t.index ["slug"], name: "index_product_categories_on_slug", unique: true
   end
 
   create_table "product_types", force: :cascade do |t|
@@ -94,6 +125,17 @@ ActiveRecord::Schema.define(version: 20180406121353) do
     t.string "fm_radio"
     t.string "recoder"
     t.text "description"
+    t.boolean "draft", default: true
+    t.integer "product_category_id"
+    t.integer "position"
+    t.string "title"
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.integer "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string "unaccented_name"
+    t.string "slug"
+    t.index ["slug"], name: "index_product_types_on_slug", unique: true
   end
 
   create_table "products", force: :cascade do |t|
@@ -105,7 +147,12 @@ ActiveRecord::Schema.define(version: 20180406121353) do
     t.boolean "draft", default: true
     t.integer "status"
     t.integer "instalment"
+    t.text "description"
+    t.integer "position"
+    t.string "unaccented_name"
+    t.string "slug"
     t.index ["product_type_id"], name: "index_products_on_product_type_id"
+    t.index ["slug"], name: "index_products_on_slug", unique: true
   end
 
   create_table "profiles", force: :cascade do |t|

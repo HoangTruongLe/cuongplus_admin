@@ -42,10 +42,10 @@ class Super::DashboardMessagesController < ApplicationController
 
   private
     def set_dashboard_message
-      @dashboard_message = DashboardMessage.find(params[:id])
+      @dashboard_message = DashboardMessage.all.find(params[:id])
     end
 
     def dashboard_message_params
-      params.require(:dashboard_message).permit(:title, :body)
+      params.require(:dashboard_message).permit(:title, :body, :avatar, :activity)
     end
 end

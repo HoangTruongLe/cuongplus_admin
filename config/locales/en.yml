@@ -31,8 +31,9 @@
 
 en:
   available: Có Hàng
-  unavailable: Hết Hàng
+  unavailable: Sắp Có Hàng
   waiting: Đợi Order
+  sold: Đã Bán
   hello: "Hello world"
   views:
     pagination:

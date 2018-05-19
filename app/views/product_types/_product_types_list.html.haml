@@ -1,23 +1,29 @@
-%table.table.table-bordered
+%table.table.table-bordered.table-responsive
   %thead
     %tr
-      %th{style: 'width: 20%;'}
-        = sort_link(@q, :id, {} , {remote: true})
-      %th{style: 'width: 50%;'}
-        = sort_link(@q, :name, {}, {remote: true})
-      %th{style: 'width: 10%;'} edit
-      %th{style: 'width: 10%;'} delete
-      %th{style: 'width: 10%;'} copy
+      %th.text-center{style: 'width: 10%;'}
+        = sort_link(@q, :id, "ID",{}, {remote: true})
+      %th{style: 'width: 30%;'}
+        = sort_link(@q, :name, "Tên danh mục", {}, {remote: true})
+      %th.text-center{style: 'width: 20%;'} 
+        = sort_link(@q, :product_category_id, "Danh mục", {}, {remote: true})
+      %th.text-center{style: 'width: 10%;'}
+        = sort_link(@q, :position, "Vị trí", {}, {remote: true})
+      %th.text-center{style: 'width: 10%;'} Sửa
+      %th.text-center{style: 'width: 10%;'} Xoá
+      %th.text-center{style: 'width: 10%;'} Copy
 
   %tbody
     - @product_types.each do |product_type|
       %tr
-        %td= product_type.id
+        %td.text-center= product_type.id
         %td= product_type.name
-        %td= link_to '', edit_product_type_path(product_type), class: 'fa fa-edit'
-        %td
+        %td.text-center= product_type.product_category.try(:name)
+        %td.text-center= product_type.position
+        %td.text-center= link_to '', edit_product_type_path(product_type), class: 'fa fa-edit'
+        %td.text-center
           - if can? :delete, product_type
             = link_to '', product_type_path(product_type), class: 'fa fa-times',
-             method: :delete, data: { confirm: 'Are you sure?' }, remote: true
-        %td
+             method: :delete, data: { confirm: 'Bạn có chắc chắn muốn xoá không?' }, remote: true
+        %td.text-center
           = link_to '', copy_product_type_path(product_type), class: 'fa fa-copy'

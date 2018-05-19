@@ -4,8 +4,9 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
     %meta{:charset => "utf-8"}
     %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}
-    %meta{:content => "", :name => "description"}
-    %meta{:content => "", :name => "author"}
+    %meta{:content => "cuongplus", :name => "description"}
+    %meta{:content => "iphone", :name => "major"}
+    %meta{:content => "apple watch", :name => "major"}
     %title CuongPlus.vn
     %link{:href => "https://fonts.googleapis.com/css?family=Montserrat:400,700", :rel => "stylesheet", :type => "text/css"}
     %link{:href => "https://fonts.googleapis.com/css?family=Kaushan+Script", :rel => "stylesheet", :type => "text/css"}
@@ -13,16 +14,18 @@
     %link{:href => "https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700", :rel => "stylesheet", :type => "text/css"}
     %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css", :rel => "stylesheet"}
     %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css", :rel => "stylesheet"}
+    %link{:href => "https://fonts.googleapis.com/css?family=Encode+Sans+Semi+Condensed", :rel => "stylesheet"}
     %link{:href => "https://fonts.googleapis.com/css?family=Noto+Sans:400,700", :rel => "stylesheet", :type => "text/css"}
+    %link{rel: "shortcut icon", type:"image/x-icon", href: asset_path('favicon.jpg')}
     %title CuongPlus
     = csrf_meta_tags
     = hidden_field_tag :authenticity_token, form_authenticity_token
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
     = analytics_init if Rails.env.production?
-  %body#page-top
+  %body#page-top{style: "background-color: white"}
     / Navigation
-    %nav#mainNav.navbar.navbar-expand-lg.navbar-dark.fixed-top
+    %nav#mainNav.navbar.navbar-expand-lg.fixed-top
       .container
         %a.navbar-brand.js-scroll-trigger{:href => "/"} CuongPlus.vn
         %button.navbar-toggler.navbar-toggler-right{"aria-controls" => "navbarResponsive", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarResponsive", "data-toggle" => "collapse", :type => "button"}
@@ -31,106 +34,44 @@
         #navbarResponsive.collapse.navbar-collapse
           %ul.navbar-nav.text-uppercase.ml-auto
             %li.nav-item
-              %a.nav-link.js-scroll-trigger{:href => "#services"} Dịch Vụ
+              = search_form_for @q, remote: true, method: :get, url: root_path do |f|
+                = f.search_field :name_or_price_cont_any, {placeholder: 'Sản phẩm...', class: 'form-control searchbox', onkeydown: "search_on_enter(event, this)"}
+                = f.submit 'Tìm kiếm', {class: 'btn btn-primary pull-right ml-1', style: 'display:none'}
+            - ProductCategory.all.active.order_by_position.each do |category|
+              %li.nav-item
+                = link_to category.name, category_index_path(category), class: 'nav-link js-scroll-trigger'
             %li.nav-item
-              %a.nav-link.js-scroll-trigger{:href => "#portfolio"} Sản Phẩm
-            %li.nav-item
-              %a.nav-link.js-scroll-trigger{:href => "#team"} Địa chỉ
-            %li.nav-item
-              %a.nav-link.js-scroll-trigger{:href => "#maps"} Bản đồ
-            %li.nav-item
-              %a.nav-link.js-scroll-trigger{:href => "#contact"} Liên Hệ
+              %a.nav-link.js-scroll-trigger{:href => "#contact"} 
+                %i.mdi.mdi-phone-in-talk{style: 'font-size: 20px; line-height: 0'}
+            - if current_user
+              %li.nav-item
+                %a.nav-link.js-scroll-trigger{:href => "/super/dashboard_messages"}
+                  %i.mdi.mdi-radar{style: 'font-size: 20px; line-height: 0'}
+              %li.nav-item
+                %a.nav-link.js-scroll-trigger{:href => "/users/sign_out"}
+                  %i.mdi.mdi-logout{style: 'font-size: 20px; line-height: 0'}
     / Header
-    %header.masthead
+    %header.chevron{style: "margin-top: -100px"}
       .container
-        .intro-text
-          .intro-lead-in Chuyên mua bán điện thoại giá tốt nhất thị trường
-          %h2 iPhone, iPad, Apple watch, Samsung
-          %a.btn.btn-primary.btn-xl.text-uppercase.js-scroll-trigger{:href => "#portfolio"} Sản Phẩm
-    %section#portfolio.bg-light
-      .container
-        = yield
+        .head-images-wrapper#promotion_images
+          - DashboardMessage.all.active.each do |promotion|
+            %a{href: promotion_info_path(promotion)}
+              = image_tag promotion.s3_path, class: 'promotion-image' if promotion.s3_path
+    .container-fluid
+      %div{class: "text-center phone-button"}
+        0902.712.712
+    .container-fluid.remove_padding
+      = yield
     / About
-    %section#services
-      .container
-        .row
-          .col-lg-12.text-center
-            %h2.section-heading.text-uppercase Dịch Vụ
-            %h3.section-subheading.text-muted Chuyên mua bán sửa chữa iPhone, iPad, Apple Watch, Samsung ...
-        .row.text-center
-          .col-md-4
-            %span.fa-stack.fa-4x
-              %i.fa.fa-circle.fa-stack-2x.text-primary
-              %i.fa.fa-shopping-cart.fa-stack-1x.fa-inverse
-            %h4.service-heading Mua Bán
-            %p.text-muted Mua, bán, trao đổi các loại điện thoại, máy tính bảng, smart watch ...
-          .col-md-4
-            %span.fa-stack.fa-4x
-              %i.fa.fa-circle.fa-stack-2x.text-primary
-              %i.fa.fa-laptop.fa-stack-1x.fa-inverse
-            %h4.service-heading Sửa chữa
-            %p.text-muted Sửa chữa, thay thế linh kiện, ép kính ...
-          .col-md-4
-            %span.fa-stack.fa-4x
-              %i.fa.fa-circle.fa-stack-2x.text-primary
-              %i.fa.fa-wrench.fa-stack-1x.fa-inverse
-            %h4.service-heading Bảo hành
-            %p.text-muted Đảm bảo các chính sách bảo hành chính hãng hoặc chính sách bảo hành của cửa hàng
-
-    %section#team.bg-light
-      .container
-        .row
-          .col-lg-12.text-center
-            %h3.section-heading.text-uppercase Địa chỉ
-            %a{:href => "#"} 0902712712
-        .row
-          .col-sm-12.text-center
-            .team-member
-              %img.mx-auto.rounded-circle{:alt => "", :src => "https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.0-9/29683484_1787579971305562_7960054817416023658_n.jpg?_nc_cat=0&oh=01c83570dc4a8d230ae38be0d6a5d7f1&oe=5B34E807"}/
-              %h4 Cường Plus
-              %p.text-muted Shop Owner
-              %ul.list-inline.social-buttons
-                %li.list-inline-item
-                  %a{:href => "https://www.facebook.com/cuongplus"}
-                    %i.fa.fa-facebook
-        .row
-          .col-lg-8.mx-auto.text-center
-            %p.large.text-muted 42 Lê Đình Lý - Đà Nẵng
-    / Clients
-    %section#maps
-      .container
-        .row
-          .col-12.text-center
-            %h3 Google Maps
-            #map
     %section#contact
       .container
+        .col-lg-12
+          %h3.section-heading.text-uppercase Cường: 0902.712.712
+        .col-lg-12
+          %h3.section-heading.text-uppercase Cửa hàng: Số 42 Lê Đình Lý - Quận Thanh Khê - Đà Nẵng
         .row
-          .col-lg-12.text-center
-            %h2.section-heading.text-uppercase Liên hệ
-            %h3.section-subheading.text-muted Để lại thông tin liên hệ của bạn, chúng tôi sẽ liên lạc với bạn
-        .row
-          .col-lg-12
-            %form#contactForm{:name => "sentMessage", :novalidate => ""}
-              .row
-                .col-md-6
-                  .form-group
-                    %input#name.form-control{"data-validation-required-message" => "Please enter your name.", :placeholder => "Your Name *", :required => "", :type => "text"}/
-                    %p.help-block.text-danger
-                  .form-group
-                    %input#email.form-control{"data-validation-required-message" => "Please enter your email address.", :placeholder => "Your Email *", :required => "", :type => "email"}/
-                    %p.help-block.text-danger
-                  .form-group
-                    %input#phone.form-control{"data-validation-required-message" => "Please enter your phone number.", :placeholder => "Your Phone *", :required => "", :type => "tel"}/
-                    %p.help-block.text-danger
-                .col-md-6
-                  .form-group
-                    %textarea#message.form-control{"data-validation-required-message" => "Please enter a message.", :placeholder => "Your Message *", :required => ""}
-                    %p.help-block.text-danger
-                .clearfix
-                .col-lg-12.text-center
-                  #success
-                  %button#sendMessageButton.btn.btn-primary.btn-xl.text-uppercase{:type => "submit"} Send Message
+          .col-12.text-center
+            #map
     / Footer
     %footer
       .container
@@ -141,13 +82,7 @@
             %ul.list-inline.social-buttons
               %li.list-inline-item
                 %a{:href => "https://www.facebook.com/cuongplus"}
-                  %i.fa.fa-twitter
-              %li.list-inline-item
-                %a{:href => "https://www.facebook.com/cuongplus"}
-                  %i.fa.fa-facebook
-              %li.list-inline-item
-                %a{:href => "https://www.facebook.com/cuongplus"}
-                  %i.fa.fa-linkedin
+                  %i.ti.ti-facebook
           .col-md-4
             %ul.list-inline.quicklinks
               %li.list-inline-item

@@ -1,0 +1,6 @@
+%section#portfolio.bg-light
+  .container
+    = render 'product_list'
+    .row
+      %ul.pagination.pagination-sm.no-margin.pull-right#paginator{style: "margin: auto"}
+        = paginate @products, remote: true
