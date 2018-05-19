@@ -23,6 +23,13 @@ $(document).ready(function(){
     autoplaySpeed: 5000,
   });
   $(".best_in_place").best_in_place();
+  
+  $(document).ready(function(){
+    var ParentWidth = $('.parent').width();
+    if (ParentWidth > 400) {
+        $('.parent').addClass('newstyle');
+    }
+  });
 })
 
 function readURL(input, render_element) {

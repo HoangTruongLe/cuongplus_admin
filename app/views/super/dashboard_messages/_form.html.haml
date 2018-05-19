@@ -1,16 +1,16 @@
 .col-lg-12
   = simple_form_for [:super, @dashboard_message] do |f|
     .row.card-box
-      .col-12
+      .col-lg-12
         .form-group.row
-          %label{for: 'Title', class: 'col-1 col-form-label'}
+          %label{for: 'Title', class: 'col-lg-1 col-form-label'}
             Tiêu đề
-          .col-8
+          .col-lg-8
             = f.input :title, label: false, input_html: { class: 'form-control' }
-      .col-12
+      .col-lg-12
         .form-group.row
-          = f.label "Trạng thái", class: "col-1 col-form-label"
-          .col-10.row
+          = f.label "Trạng thái", class: "col-lg-1 col-form-label"
+          .col-lg-10.row
             .radio.radio-primary.radio-inline.collection_radio_buttons_lable
               = f.radio_button :activity, true
               = f.label :activity_true, 'Hoạt động'
@@ -18,11 +18,11 @@
               = f.radio_button :activity, false
               = f.label :activity_false, 'Không hoạt động'
     .row.card-box
-      .col-12
+      .col-lg-12
         .form-group.row
-          %label{for: 'position', class: 'col-1 col-form-label'}
+          %label{for: 'position', class: 'col-lg-1 col-form-label'}
             Avatar
-          .col-4
+          .col-lg-4
             = f.input :avatar, as: :file, label: false, input_html: { class: 'form-control', onchange: "readURL(this, '#avatar')" }
             = hidden_field_tag :avatar_del
             - if @dashboard_message.avatar.exists?
@@ -35,10 +35,10 @@
             - else
               #avatar
     .form-group.row.card-box
-      %label{for: 'position', class: 'col-1 col-form-label'}
+      %label{for: 'position', class: 'col-lg-1 col-form-label'}
         Mô tả
-      .col-12
+      .col-lg-12
         = f.input :body, label: false, input_html: { class: 'form-control froalaEditor' }
     .form-group.row.card-box
-      .col-12
+      .col-lg-12
         = f.submit :save, class: 'btn btn-primary pull-right'

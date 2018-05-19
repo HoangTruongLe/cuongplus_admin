@@ -2,7 +2,7 @@
   %div.topbar-left
     %div.text-center
       %a{class:'logo', href: '/'}
-        %i.mdi.mdi-radar CuongPlus
+        %i.mdi.mdi-radar CP
   %nav.navbar-custom
     %ul.list-inline.float-right.mb-0
       %li.list-inline-item.notification-list.hide-phone
@@ -14,10 +14,10 @@
         %div.dropdown-menu.dropdown-menu-right.profile-dropdown{'aria-labelledby': 'Preview'}
           %div.dropdown-item.noti-title
             %h5.text-overflow
-              %small= current_user.full_name.presence || current_user.email
+              %small{style: 'color: white'}= current_user.full_name.presence.capitalize || current_user.email.capitalize
           %a{href: destroy_user_session_path, class:  'dropdown-item notify-item'}
             %i.mdi.mdi-logout
-              %span Logout
+              %span{style: 'color: white'} Sign out
     %ul.list-inline.menu-left.mb-0
       %li.float-left
         %button.button-menu-mobile.open-left.waves-light.waves-effect

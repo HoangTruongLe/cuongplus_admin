@@ -284,7 +284,8 @@
   overflow: hidden;
 }
 .eyecatch{
-  max-width: 200px;
+  min-width: 100%;
+  height: auto;
   margin: 0px auto;
   border: 1px solid #F2F2F2;
   padding: 10px;
@@ -710,6 +711,13 @@ h1, h2, h3, h4, h5, h6, span{
       width: 90%;
     }
   }
+  
+}
+
+@media (max-width: 1025px){
+  .no-show{
+    display: none !important;
+  }
 }
 
 @media (max-width: 321px){
@@ -732,4 +740,8 @@ h1, h2, h3, h4, h5, h6, span{
   margin: 20px auto;
   padding: 30px;
   background-color: #F2F3F3;
+}
+
+.side-menu{
+  z-index: 999;
 }

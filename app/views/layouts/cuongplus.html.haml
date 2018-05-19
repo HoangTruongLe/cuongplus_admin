@@ -4,8 +4,9 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
     %meta{:charset => "utf-8"}
     %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}
-    %meta{:content => "", :name => "description"}
-    %meta{:content => "", :name => "author"}
+    %meta{:content => "cuongplus", :name => "description"}
+    %meta{:content => "iphone", :name => "major"}
+    %meta{:content => "apple watch", :name => "major"}
     %title CuongPlus.vn
     %link{:href => "https://fonts.googleapis.com/css?family=Montserrat:400,700", :rel => "stylesheet", :type => "text/css"}
     %link{:href => "https://fonts.googleapis.com/css?family=Kaushan+Script", :rel => "stylesheet", :type => "text/css"}
@@ -15,6 +16,7 @@
     %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css", :rel => "stylesheet"}
     %link{:href => "https://fonts.googleapis.com/css?family=Encode+Sans+Semi+Condensed", :rel => "stylesheet"}
     %link{:href => "https://fonts.googleapis.com/css?family=Noto+Sans:400,700", :rel => "stylesheet", :type => "text/css"}
+    %link{rel: "shortcut icon", type:"image/x-icon", href: asset_path('favicon.jpg')}
     %title CuongPlus
     = csrf_meta_tags
     = hidden_field_tag :authenticity_token, form_authenticity_token
@@ -39,12 +41,15 @@
               %li.nav-item
                 = link_to category.name, category_index_path(category), class: 'nav-link js-scroll-trigger'
             %li.nav-item
-              %a.nav-link.js-scroll-trigger{:href => "#contact"} Liên Hệ
+              %a.nav-link.js-scroll-trigger{:href => "#contact"} 
+                %i.mdi.mdi-phone-in-talk{style: 'font-size: 20px; line-height: 0'}
             - if current_user
               %li.nav-item
-                %a.nav-link.js-scroll-trigger{:href => "/users/sign_out"} Logout
+                %a.nav-link.js-scroll-trigger{:href => "/super/dashboard_messages"}
+                  %i.mdi.mdi-radar{style: 'font-size: 20px; line-height: 0'}
               %li.nav-item
-                %a.nav-link.js-scroll-trigger{:href => "/super/dashboard_messages"} Admin
+                %a.nav-link.js-scroll-trigger{:href => "/users/sign_out"}
+                  %i.mdi.mdi-logout{style: 'font-size: 20px; line-height: 0'}
     / Header
     %header.chevron{style: "margin-top: -100px"}
       .container
@@ -77,13 +82,7 @@
             %ul.list-inline.social-buttons
               %li.list-inline-item
                 %a{:href => "https://www.facebook.com/cuongplus"}
-                  %i.fa.fa-twitter
-              %li.list-inline-item
-                %a{:href => "https://www.facebook.com/cuongplus"}
-                  %i.fa.fa-facebook
-              %li.list-inline-item
-                %a{:href => "https://www.facebook.com/cuongplus"}
-                  %i.fa.fa-linkedin
+                  %i.ti.ti-facebook
           .col-md-4
             %ul.list-inline.quicklinks
               %li.list-inline-item
