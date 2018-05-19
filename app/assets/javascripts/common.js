@@ -15,7 +15,13 @@ $(document).ready(function(){
   var myLazyLoad = new LazyLoad({
     elements_selector: "img"
   });
-  $('#product_images').slick({dots: true});
+  $('#product_images, #promotion_images').slick({
+    dots: true,
+    infinite: true,
+    speed: 800,
+    autoplay: true,
+    autoplaySpeed: 5000,
+  });
   $(".best_in_place").best_in_place();
 })
 
@@ -50,7 +56,6 @@ function search_on_enter(evt, el){
   if (evt.keyCode == 13) { 
     $(el).next().click(); 
     $('#navbarResponsive').removeClass('show'); 
-    $(document).scrollTop( $("#product_list").offset().top ); 
     return false; 
   }
 }

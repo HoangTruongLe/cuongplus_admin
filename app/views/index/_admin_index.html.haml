@@ -49,7 +49,8 @@
           .row.product-container
             
             .col-xl-6.mb-2
-              = image_tag type.s3_path(:sz1) if type.s3_path(:sz1)
+              %a{href: type_info_path(type)}
+                = image_tag type.s3_path(:sz1) if type.s3_path(:sz1)
             .col-xl-6 
               %table.table.table-bordered
                 %thead{class: "#{ idx.odd? ? 'table-chevron-head' : 'table-no-chevron-head' }"}

@@ -13,6 +13,7 @@ class DashboardMessage < ApplicationRecord
 
   scope :with_title_like, -> (q) { where('title LIKE ?', "%#{q}%") }
   scope :with_body_like, -> (q) { where('body LIKE ?', "%#{q}%") }
+  scope :active, -> { where(activity: true) }
 
   def self.filter_and_sort(params)
     dashboard_messages = all

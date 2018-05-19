@@ -1,0 +1,10 @@
+.container.eyecatch-background
+  .row
+    .col-12.text-center
+      %h1= @promotion.title.capitalize
+  .row
+    .col-12
+      = image_tag @promotion.s3_path, class: 'promotion-image' if @promotion.s3_path
+  .row
+    .col-12.product-description
+      = raw(@promotion.body.capitalize)

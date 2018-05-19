@@ -461,16 +461,9 @@
   }
 }
 
-.masthead .container{
-  background: url(tra-gop.png);
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: center center;
-  -webkit-background-size: 100%;
-  -moz-background-size: 100%;
-  -o-background-size: 100%;
-  background-size: 100%;
-} 
+.head-images-wrapper{
+  margin-top: 100px;
+}
 
 .product-type-name{
   text-decoration: none;
@@ -697,6 +690,8 @@ h1, h2, h3, h4, h5, h6, span{
   font-family: 'arial helvetica', sans-serif !important;
   text-align: justify;
   padding: 20px 50px;
+  width: 100%;
+  margin: auto;
   strong{
     display: contents;
   }
@@ -715,4 +710,26 @@ h1, h2, h3, h4, h5, h6, span{
       width: 90%;
     }
   }
+}
+
+@media (max-width: 321px){
+  .phone-button{
+    width: 90% !important;
+  }
+}
+
+
+#product_list{
+  margin: 20px 0px;
+}
+
+.promotion-image{
+  width: 100%;
+  margin: 20px auto;
+}
+
+.eyecatch-background{
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #F2F3F3;
 }

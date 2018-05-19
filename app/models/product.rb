@@ -15,7 +15,7 @@ class Product < ApplicationRecord
   scope :is_not_draft, -> { where(draft: false) }
   scope :with_price_like, -> (q) { where('price LIKE ?', "%#{q}%") }
   scope :with_type_like, -> (q) { joins(:product_type).where('lower_unaccent(product_types.name) ILIKE lower_unaccent(?)', "%#{q}%") }
-  scope :search_order, -> { order("created_at desc, updated_at desc") }
+  scope :search_order, -> { order("updated_at desc, created_at desc") }
   scope :order_by_position, -> { order(position: :asc) }
   scope :instalment, -> { where('instalment > 0') }
   

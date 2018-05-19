@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180515083842) do
+ActiveRecord::Schema.define(version: 20180519070640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20180515083842) do
     t.datetime "avatar_updated_at"
     t.boolean "activity", default: true
     t.string "slug"
+    t.string "unaccented_title"
     t.index ["slug"], name: "index_dashboard_messages_on_slug", unique: true
   end
 

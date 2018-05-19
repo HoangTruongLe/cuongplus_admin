@@ -15,6 +15,7 @@ ProductCategory.create(name: "Điện Thoại", position: 1)
 ProductCategory.create(name: "Máy Tính Bảng", position: 2)
 ProductCategory.create(name: "MacBook", position: 3)
 ProductCategory.create(name: "Apple Watch", position: 4)
+ProductCategory.create(name: "Phụ kiện", position: 5)
 
 ProductCategory.first.product_types.create(name: "iPhone X", title: "Mới 100% Chưa Active - (Fullbox: sạc cáp, tai, hộp)", position: 1)
 ProductCategory.first.product_types.create(name: "iPhone 8 plus", title: "Mới 100% Chưa Active - (Fullbox: sạc cáp, tai, hộp)", position: 2)

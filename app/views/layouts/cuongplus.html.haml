@@ -33,7 +33,7 @@
           %ul.navbar-nav.text-uppercase.ml-auto
             %li.nav-item
               = search_form_for @q, remote: true, method: :get, url: root_path do |f|
-                = f.search_field :name_or_price_cont_any, {placeholder: 'Tìm ...', class: 'form-control searchbox', onkeydown: "search_on_enter(event, this)"}
+                = f.search_field :name_or_price_cont_any, {placeholder: 'Sản phẩm...', class: 'form-control searchbox', onkeydown: "search_on_enter(event, this)"}
                 = f.submit 'Tìm kiếm', {class: 'btn btn-primary pull-right ml-1', style: 'display:none'}
             - ProductCategory.all.active.order_by_position.each do |category|
               %li.nav-item
@@ -46,9 +46,12 @@
               %li.nav-item
                 %a.nav-link.js-scroll-trigger{:href => "/super/dashboard_messages"} Admin
     / Header
-    %header.masthead.chevron{style: "margin-top: -100px"}
+    %header.chevron{style: "margin-top: -100px"}
       .container
-        .intro-text{style: "margin-top: 170px; margin-bottom: 50px;"}
+        .head-images-wrapper#promotion_images
+          - DashboardMessage.all.active.each do |promotion|
+            %a{href: promotion_info_path(promotion)}
+              = image_tag promotion.s3_path, class: 'promotion-image' if promotion.s3_path
     .container-fluid
       %div{class: "text-center phone-button"}
         0902.712.712

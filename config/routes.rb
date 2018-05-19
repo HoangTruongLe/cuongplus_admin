@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   get '/c/:category_id', to: 'index#index', as: 'category_index'
+  get '/i/:type_id', to: 'index#type_info', as: 'type_info'
+  get '/p/:promotion_id', to: 'index#promotion_info', as: 'promotion_info'
   get '/:id', to: 'index#product_details', as: "product_details"
   root 'index#index'
 end
