@@ -1,6 +1,6 @@
 .row
   - @products.order(:updated_at => :desc).each do |p|
-    .col-md-12.portfolio-item.text-center
+    .col-md-6.col-lg-4.portfolio-item.text-center
       %a.portfolio-link{:href => "#{product_details_path(p)}"}
         - if p.upload_files.size > 0
           .product_images_wrapper

@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 20180515083842) do
     t.string "recoder"
     t.text "description"
     t.boolean "draft", default: true
-    t.integer "product_category_id", default: 21
+    t.integer "product_category_id"
     t.integer "position"
     t.string "title"
     t.string "avatar_file_name"

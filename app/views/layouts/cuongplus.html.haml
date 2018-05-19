@@ -33,7 +33,8 @@
           %ul.navbar-nav.text-uppercase.ml-auto
             %li.nav-item
               = search_form_for @q, remote: true, method: :get, url: root_path do |f|
-                = f.search_field :name_or_price_cont_any, {placeholder: 'Tìm ...', class: 'form-control searchbox', onkeydown: "if (event.keyCode == 13) { this.form.submit(); return false; }"}
+                = f.search_field :name_or_price_cont_any, {placeholder: 'Tìm ...', class: 'form-control searchbox', onkeydown: "search_on_enter(event, this)"}
+                = f.submit 'Tìm kiếm', {class: 'btn btn-primary pull-right ml-1', style: 'display:none'}
             - ProductCategory.all.active.order_by_position.each do |category|
               %li.nav-item
                 = link_to category.name, category_index_path(category), class: 'nav-link js-scroll-trigger'

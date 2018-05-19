@@ -45,3 +45,12 @@ function toggleInfo(el){
     $(el).closest('.product_details').find(".product_infomation").hide()
   }
 }
+
+function search_on_enter(evt, el){
+  if (evt.keyCode == 13) { 
+    $(el).next().click(); 
+    $('#navbarResponsive').removeClass('show'); 
+    $(document).scrollTop( $("#product_list").offset().top ); 
+    return false; 
+  }
+}

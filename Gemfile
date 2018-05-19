@@ -56,9 +56,8 @@ gem 'validates_email_format_of', '~> 1.6.3'
 gem "jsonb_accessor", "~> 1.0.0"
 gem 'rails-i18n'
 
-gem 'aws-sdk'
-gem 'aws-sdk-s3'
 gem 'paperclip'
+gem 'aws-sdk-s3'
 gem 'autonumeric-rails'
 gem 'dropzonejs-rails'
 gem "wysiwyg-rails"
