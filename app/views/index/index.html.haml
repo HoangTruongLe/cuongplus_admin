@@ -1,4 +1,5 @@
-- if current_user && current_user.super_user?
-  = render 'admin_index'
-- else
-  = render 'user_index'
+#product_list
+  - if current_user && current_user.super_user?
+    = render 'admin_index'
+  - else
+    = render 'user_index'

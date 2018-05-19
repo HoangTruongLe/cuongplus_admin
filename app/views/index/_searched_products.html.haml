@@ -1,0 +1,8 @@
+%section#portfolio.bg-light
+  .container
+    = render 'product_list'
+    .row
+      .col-12
+        .box-footer.clearfix
+          %ul.pagination.pagination-sm.no-margin.pull-right#paginator
+            = paginate @products, remote: true
