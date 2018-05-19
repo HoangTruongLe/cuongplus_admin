@@ -12,7 +12,7 @@ class UploadFilesController < ApplicationController
   end
 
   def get_photos
-    @upload_files = UploadFile.where(fileable_id: params[:product_id])
+    @upload_files = UploadFile.where(fileable_id: params[:file_id])
     if @upload_files.count > 0
       render json: { photos: @upload_files.map { |e| {id: e.id,
         photo_file_name: e.file_file_name,
@@ -54,7 +54,7 @@ class UploadFilesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def upload_file_params
       params.require(:upload_file).
-        merge({fileable_id: params[:product_id], fileable_type: 'Product'}).
+        merge({fileable_id: params[:file_id], fileable_type: params[:file_type]}).
         permit(:file, :fileable_id, :fileable_type)
     end
 end

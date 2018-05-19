@@ -1,0 +1,73 @@
+- @category.product_types.order_by_position.each_with_index do |type, idx|
+  - products = type.products
+  - if products.count  > 0
+    .row
+      %div{class: "#{ idx.odd? ? 'chevron' : 'no-chevron' }"}
+        %a{class: "product-type-name"}= best_in_place type, :name
+        %h4{class: "product-type-title"}= best_in_place type, :title
+        .container
+          .row
+            - if type.back_camera && type.font_camera
+              .col-xl-4.type-info  
+                .row
+                  .col-2
+                    %div{class: "#{ idx.odd? ? 'hexagon-white' : 'hexagon' }"}
+                      %i.ti-camera
+                  .col-10.text-left
+                    %h4 
+                      = type.try(:name) + " Camera"
+                    %span
+                      = best_in_place type, :back_camera 
+                      = " & " 
+                      = best_in_place type, :font_camera
+            - if type.built_in_memory && type.color
+              .col-xl-4.type-info  
+                .row
+                  .col-2
+                    %div{class: "#{ idx.odd? ? 'hexagon-white' : 'hexagon' }"}
+                      %i.ti-save
+                  .col-10.text-left
+                    %h4 Dung lượng & màu sắc
+                    %span
+                      = best_in_place type, :built_in_memory
+                      = ' & ' 
+                      = best_in_place type, :color
+            - if type.screen_type && type.resolution && type.screen_size
+              .col-xl-4.type-info  
+                .row
+                  .col-2
+                    %div{class: "#{ idx.odd? ? 'hexagon-white' : 'hexagon' }"}
+                      %i.ti-desktop
+                  .col-10.text-left
+                    %h4 Màn hình
+                    %span
+                      = best_in_place type, :screen_type 
+                      = ' - ' 
+                      = best_in_place type, :resolution 
+                      = ' - ' 
+                      = best_in_place type, :screen_size
+          .row.product-container
+            
+            .col-xl-6.mb-2
+              %a{href: type_info_path(type)}
+                = image_tag type.s3_path(:sz1) if type.s3_path(:sz1)
+            .col-xl-6 
+              %table.table.table-bordered
+                %thead{class: "#{ idx.odd? ? 'table-chevron-head' : 'table-no-chevron-head' }"}
+                  %tr
+                    %th.text-center{style: 'width: 40%;'} Sản Phẩm
+                    %th.text-center{style: 'width: 20%;'} Giá
+                    %th.text-center{style: 'width: 20%;'} Trả Trước
+                    %th.text-center{style: 'width: 20%;'} Trạng thái
+
+                %tbody{class: "#{ idx.odd? ? 'table-chevron-body' : 'table-no-chevron-body' }"}
+                  - products.order_by_position.each do |product|
+                    %tr
+                      %td.text-left
+                        %span= best_in_place product, :name
+                      %td.text-center
+                        %span= best_in_place product, :price, :display_with => :number_to_currency, :helper_options => {:unit => "", :precision => 0}
+                      %td.text-center
+                        %span= best_in_place product, :instalment, :display_with => :number_to_currency, :helper_options => {:unit => "", :precision => 0}
+                      %td.text-center
+                        %span= best_in_place product, :status, :as => :select, collection: Product::STATUS.map{ |status| [status[0], t(status[0])]}

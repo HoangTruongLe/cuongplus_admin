@@ -12,6 +12,6 @@ module ApplicationHelper
   end
 
   def format_currency(text)
-    number_to_currency text, unit: "đ", separator: ",", delimiter: ".", format: "%n %u", precision: 0
+    number_to_currency text, unit: "", separator: ",", delimiter: ".", format: "%n %u", precision: 0
   end
 end

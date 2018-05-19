@@ -15,6 +15,9 @@ class ProductTypesController < ApplicationController
   # GET /product_types/new
   def new
     @product_type = ProductType.new
+    @product_type.draft = true
+    @product_type.save(validate: false)
+    redirect_to edit_product_type_path(@product_type)
   end
 
   # GET /product_types/1/edit
@@ -25,11 +28,10 @@ class ProductTypesController < ApplicationController
   # POST /product_types.json
   def create
     @product_type = ProductType.new(product_type_params)
-
     respond_to do |format|
       if @product_type.save
         format.html { redirect_to product_types_url, notice: 'Product type was successfully created.' }
-        format.json { render :index, status: :created, location: @product_type }
+        format.json { render json: @product_type }
       else
         format.html { render :new }
         format.json { render json: @product_type.errors, status: :unprocessable_entity }
@@ -41,9 +43,11 @@ class ProductTypesController < ApplicationController
   # PATCH/PUT /product_types/1.json
   def update
     respond_to do |format|
-      if @product_type.update(product_type_params)
+      @product_type.assign_attributes(product_type_params)
+      @product_type.avatar = nil if params[:avatar_del] == 'true'
+      if @product_type.save!
         format.html { redirect_to product_types_url, notice: 'Product type was successfully updated.' }
-        format.json { render :index, status: :ok, location: @product_type }
+        format.json { render json: @product_type }
       else
         format.html { render :edit }
         format.json { render json: @product_type.errors, status: :unprocessable_entity }
@@ -66,21 +70,21 @@ class ProductTypesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product_type
-      @product_type = ProductType.find(params[:id])
+      @product_type = ProductType.unscoped.find(params[:id])
     end
 
     def set_query
       @q = ProductType.ransack(params[:q])
-      @product_types = @q.result().page(params[:page]).per(20)
+      @product_types =  @q.result().order(updated_at: :desc).page(params[:page]).per(20)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_type_params
-      params.require(:product_type).permit(:name, :provider, :os, :language, :screen_type,
+      params.require(:product_type).permit(:name, :product_category_id, :position, :title, :provider, :os, :language, :screen_type,
         :color, :resolution, :screen_size, :font_camera, :back_camera, :flash,
         :video_mode, :video_call, :cpu, :ram, :chipset, :address_memory, :maximum_memory,
         :built_in_memory, :extra_memory, :weight, :size, :battery_capacity, :c3g, :c4g,
         :bluetooth, :gprs, :gps, :usb, :sim_card_port, :sim_card, :wifi, :video_player,
-        :mp3_player, :fm_radio, :recoder, :description)
+        :mp3_player, :fm_radio, :recoder, :description, :avatar).merge(draft: false)
     end
 end

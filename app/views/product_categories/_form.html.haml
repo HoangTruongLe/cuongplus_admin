@@ -1,0 +1,28 @@
+.col-lg-12
+  = simple_form_for  @product_category do |f|
+    .row.card-box
+      .col-lg-12
+        .form-group.row
+          %label{for: 'name', class: 'col-lg-2 col-form-label'}
+            Tên loại
+          .col-lg-3
+            = f.input :name, label: false, input_html: { class: 'form-control' }
+      .col-lg-12
+        .form-group.row
+          %label{for: 'position', class: 'col-lg-2 col-form-label'}
+            Vị trí
+          .col-lg-1
+            = f.input :position, label: false, input_html: { class: 'form-control' }
+      .col-lg-12
+        .form-group.row
+          = f.label :activity, class: "col-lg-2 col-form-label"
+          .col-lg-10.row
+            .radio.radio-primary.radio-inline.collection_radio_buttons_lable
+              = f.radio_button :activity, true
+              = f.label :activity_true, 'Hoạt động'
+            .radio.radio-primary.radio-inline.collection_radio_buttons_lable
+              = f.radio_button :activity, false
+              = f.label :activity_false, 'Không hoạt động'
+    .form-group.row.card-box
+      .col-lg-12
+        = f.submit :save, class: 'btn btn-primary pull-right'

@@ -1,0 +1,26 @@
+%table.table.table-bordered.table-responsive
+  %thead
+    %tr
+      %th.text-center{style: 'width: 10%;'}
+        = sort_link(@q, :id, "ID", {} , {remote: true})
+      %th{style: 'width: 50%;'}
+        = sort_link(@q, :name, "Tên danh mục", {}, {remote: true})
+      %th.text-center{style: 'width: 10%;'} 
+        = sort_link(@q, :position, "Vị trí", {}, {remote: true})
+      %th.text-center{style: 'width: 10%;'} Sửa
+      %th.text-center{style: 'width: 10%;'} Xoá
+      %th.text-center{style: 'width: 10%;'} Copy
+
+  %tbody
+    - @product_categories.each do |product_category|
+      %tr
+        %td.text-center= product_category.id
+        %td= product_category.name
+        %td.text-center= product_category.position
+        %td.text-center= link_to '', edit_product_category_path(product_category), class: 'fa fa-edit'
+        %td.text-center
+          - if can? :delete, product_category
+            = link_to '', product_category_path(product_category), class: 'fa fa-times',
+             method: :delete, data: { confirm: 'Bạn có chắc chắn muốn xoá không?' }, remote: true
+        %td.text-center
+          = link_to '', copy_product_category_path(product_category), class: 'fa fa-copy'

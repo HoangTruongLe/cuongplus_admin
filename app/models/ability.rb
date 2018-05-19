@@ -15,6 +15,7 @@ class Ability
     can :manage, DashboardMessage
     can :manage, ProductType
     can :manage, Product
+    can :manage, ProductCategory
   end
 
   def permissions_for_normal_users
