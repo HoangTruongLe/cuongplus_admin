@@ -7,7 +7,7 @@ set :deploy_to, '/home/ubuntu/cuongplus_admin'
 append :linked_files, "config/database.yml", "config/secrets.yml", "config/application.yml"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 load 'lib/seed.rb'
-after 'deploy:migrating', :seed
+# after 'deploy:migrating', :seed
 
 
 # Default branch is :master
