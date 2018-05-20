@@ -76,7 +76,7 @@ group :development, :test do
   gem 'capistrano', '~> 3.8', '>= 3.8.1'
   gem 'capistrano-bundler', '~> 1.2'
   gem 'capistrano-rails', '~> 1.3'
-  # gem 'capistrano-passenger', '~> 0.2.0'
+  gem 'capistrano-passenger', '~> 0.2.0'
   gem 'capistrano-rvm', github: "capistrano/rvm"
 
   gem 'annotate', '~> 2.7', '>= 2.7.1'
