@@ -67,7 +67,7 @@
 //= require third_party/embedly.min
 //= require third_party/image_aviary.min
 //= require third_party/spell_checker.min
-//= require common
+//= require common.jsx
 //= require toastr
 //= require lazyload.min
 //= require best_in_place
