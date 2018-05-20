@@ -37,7 +37,7 @@ function readURL(input, render_element) {
     var reader = new FileReader();
     reader.onload = function(e) {
       $(render_element).html("");
-      $(render_element).append(`<div class="container"><img class="image" src="${e.target.result}"><div class="middle"><div class="text" onclick='remove_file(this, "#avatar_del")'>Xoá</div></div></div>`)
+      $(render_element).append('<div class="container"><img class="image" src="'+ e.target.result +'"><div class="middle"><div class="text" onclick="remove_file(this, \'#avatar_del\')">Xoá</div></div></div>')
       $('#avatar_del').val('')
     }
     reader.readAsDataURL(input.files[0]);
