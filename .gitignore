@@ -26,5 +26,4 @@ public/system/
 config/database.yml
 config/secrets.yml
 config/environments/development.rb
-config/database.yml
-config/secrets.yml
+.env
