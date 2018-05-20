@@ -50,6 +50,11 @@ ProductCategory.third.product_types.create(name: "MacBook Air 2015", title: "M�
 ProductCategory.fourth.product_types.create(name: "Apple Watch 38mm", title: "Mới 100% Chưa Active - (Fullbox: sạc cáp, tai, hộp)", position: 1)
 ProductCategory.fourth.product_types.create(name: "Apple Watch 42mm", title: "Mới 100% Chưa Active - (Fullbox: sạc cáp, tai, hộp)", position: 2)
 
+ProductCategory.fifth.product_types.create(name: "Sạc", title: "Mới 100% - chính hãng", position: 1)
+ProductCategory.fifth.product_types.create(name: "Tai nghe", title: "Mới 100% - chính hãng", position: 2)
+ProductCategory.fifth.product_types.create(name: "Cáp", title: "Mới 100% - chính hãng", position: 3)
+ProductCategory.fifth.product_types.create(name: "Dây Apple Watch", title: "Mới 100% - chính hãng", position: 4)
+
 ProductType.all.each do |type|
   type.products.create(name: type.name + ' Black', price: 19000000, position: 1)
   type.products.create(name: type.name + ' Red', price: 19000000, position: 2)
