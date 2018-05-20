@@ -10,6 +10,7 @@ unless User.find_by_email("admin@cuongplus.vn")
   User.create(email: 'admin@cuongplus.vn', password: '123456', first_name: "cuong", last_name: 'plus', role: 0)
   puts 'Admin has been populated'
 end
+
 ProductCategory.destroy_all
 
 ProductCategory.create(name: "Điện Thoại", position: 1)
