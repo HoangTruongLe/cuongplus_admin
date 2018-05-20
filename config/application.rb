@@ -6,8 +6,6 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 Dotenv::Railtie.load
 
-ENV.update YAML.load(File.read(File.expand_path('../application.yml', __FILE__)))
-
 module EzyPortal
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
