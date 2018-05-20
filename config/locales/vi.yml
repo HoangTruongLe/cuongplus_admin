@@ -1,0 +1,11 @@
+vi:
+  available: Có Hàng
+  unavailable: Sắp Có Hàng
+  waiting: Đợi Order
+  sold: Đã Bán
+  hello: "Hello world"
+  views:
+    pagination:
+      previous: "Previous"
+      next: "Next"
+      truncate: "..."
