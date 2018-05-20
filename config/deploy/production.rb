@@ -49,7 +49,7 @@
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------
-server "54.200.239.22",
+server "34.209.73.9",
   user: "ubuntu",
   roles: %w{web db app},
   ssh_options: {
