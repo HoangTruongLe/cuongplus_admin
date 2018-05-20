@@ -85,6 +85,10 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    browserify-rails (4.3.0)
+      addressable (>= 2.4.0)
+      railties (>= 4.0.0)
+      sprockets (>= 3.6.0)
     builder (3.2.3)
     byebug (10.0.2)
     cancancan (2.2.0)
@@ -430,6 +434,7 @@ DEPENDENCIES
   aws-sdk-s3
   best_in_place
   bootstrap-sass (~> 3.3, >= 3.3.7)
+  browserify-rails
   byebug
   cancancan (~> 2.0)
   capistrano (~> 3.8, >= 3.8.1)
