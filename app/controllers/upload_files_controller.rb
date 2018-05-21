@@ -27,7 +27,7 @@ class UploadFilesController < ApplicationController
   def upload_editor
     @upload_file = UploadFile.new(file: params[:file])
     if @upload_file.save!
-      render json: { link: @upload_file.s3_path(:large)}
+      render json: { link: @upload_file.file.url }
     else
       render json: { message: @upload_file.errors.full_message, status: :unprocessable_entity }
     end

@@ -91,6 +91,9 @@ Rails.application.configure do
   
   config.paperclip_defaults = {
     storage: :s3,
+    preserve_files: true,
+    :s3_protocol => :https,
+    s3_host_name: "s3-#{ENV['AWS_REGION_DEV']}.amazonaws.com",
     s3_credentials: {
       bucket: ENV['S3_BUCKET_NAME_DEV'],
       access_key_id: ENV['AWS_ACCESS_KEY_ID_DEV'],

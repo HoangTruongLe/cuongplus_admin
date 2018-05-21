@@ -7,45 +7,42 @@
         %h4{class: "product-type-title"}= best_in_place type, :title
         .container
           .row
-            - if type.back_camera && type.font_camera
-              .col-xl-4.type-info  
-                .row
-                  .col-2
-                    %div{class: "#{ idx.odd? ? 'hexagon-white' : 'hexagon' }"}
-                      %i.ti-camera
-                  .col-10.text-left
-                    %h4 
-                      = type.try(:name) + " Camera"
-                    %span
-                      = best_in_place type, :back_camera 
-                      = " & " 
-                      = best_in_place type, :font_camera
-            - if type.built_in_memory && type.color
-              .col-xl-4.type-info  
-                .row
-                  .col-2
-                    %div{class: "#{ idx.odd? ? 'hexagon-white' : 'hexagon' }"}
-                      %i.ti-save
-                  .col-10.text-left
-                    %h4 Dung lượng & màu sắc
-                    %span
-                      = best_in_place type, :built_in_memory
-                      = ' & ' 
-                      = best_in_place type, :color
-            - if type.screen_type && type.resolution && type.screen_size
-              .col-xl-4.type-info  
-                .row
-                  .col-2
-                    %div{class: "#{ idx.odd? ? 'hexagon-white' : 'hexagon' }"}
-                      %i.ti-desktop
-                  .col-10.text-left
-                    %h4 Màn hình
-                    %span
-                      = best_in_place type, :screen_type 
-                      = ' - ' 
-                      = best_in_place type, :resolution 
-                      = ' - ' 
-                      = best_in_place type, :screen_size
+            .col-xl-4.type-info  
+              .row
+                .col-2
+                  %div{class: "#{ idx.odd? ? 'hexagon-white' : 'hexagon' }"}
+                    %i.ti-camera
+                .col-10.text-left
+                  %h4 
+                    = type.try(:name) + " Camera"
+                  %span
+                    = best_in_place type, :back_camera 
+                    = " & " 
+                    = best_in_place type, :font_camera
+            .col-xl-4.type-info  
+              .row
+                .col-2
+                  %div{class: "#{ idx.odd? ? 'hexagon-white' : 'hexagon' }"}
+                    %i.ti-save
+                .col-10.text-left
+                  %h4 Dung lượng & màu sắc
+                  %span
+                    = best_in_place type, :built_in_memory
+                    = ' & ' 
+                    = best_in_place type, :color
+            .col-xl-4.type-info  
+              .row
+                .col-2
+                  %div{class: "#{ idx.odd? ? 'hexagon-white' : 'hexagon' }"}
+                    %i.ti-desktop
+                .col-10.text-left
+                  %h4 Màn hình
+                  %span
+                    = best_in_place type, :screen_type 
+                    = ' - ' 
+                    = best_in_place type, :resolution 
+                    = ' - ' 
+                    = best_in_place type, :screen_size
           .row.product-container
             
             .col-xl-6.mb-2

@@ -7,7 +7,7 @@
         %h4{class: "product-type-title"}=type.title
         .container
           .row
-            - if type.back_camera && type.font_camera
+            - if type.back_camera.present? && type.font_camera.present?
               .col-xl-4.type-info  
                 .row
                   .col-2
@@ -18,7 +18,7 @@
                       = type.try(:name) + " Camera"
                     %span
                       = type.back_camera + " & " + type.font_camera
-            - if type.built_in_memory && type.color
+            - if type.built_in_memory.present? && type.color.present?
               .col-xl-4.type-info  
                 .row
                   .col-2
@@ -28,7 +28,7 @@
                     %h4 Dung lượng & màu sắc
                     %span
                       = type.built_in_memory + ' & ' + type.color
-            - if type.screen_type && type.resolution && type.screen_size
+            - if type.screen_type.present? && type.resolution.present? && type.screen_size.present?
               .col-xl-4.type-info  
                 .row
                   .col-2
