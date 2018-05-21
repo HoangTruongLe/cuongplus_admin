@@ -1,5 +1,5 @@
 - @category.product_types.order_by_position.each_with_index do |type, idx|
-  - products = type.products
+  - products = type.products.except_sold
   - if products.count  > 0
     .row
       %div{class: "#{ idx.odd? ? 'chevron' : 'no-chevron' }"}

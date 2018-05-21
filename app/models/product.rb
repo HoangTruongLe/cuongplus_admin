@@ -18,6 +18,7 @@ class Product < ApplicationRecord
   scope :search_order, -> { order("updated_at desc, created_at desc") }
   scope :order_by_position, -> { order(position: :asc) }
   scope :instalment, -> { where('instalment > 0') }
+  scope :except_sold, -> { where.not(status: :sold)}
   
   enum status: [:available, :unavailable, :waiting, :sold]
   STATUS = [[:available, 'Available'] ,[:unavailable, 'Unavailable'], [:waiting, 'Waiting'], [:sold, 'Sold']]
